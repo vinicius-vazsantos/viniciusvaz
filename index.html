@@ -15,6 +15,9 @@
         <link rel="stylesheet" href="./assets/fonts/css/boxicons.min.css">
         <link rel="stylesheet" href="./assets/css/theme.min.css">
 
+        <script src="./assets/libs/threejs/three.min.js"></script>
+        <script src="./assets/libs/vanta/vanta.waves.min.js"></script>
+
         <style>
           .position-fixed {
             z-index: 1000;
@@ -25,118 +28,520 @@
             transition: background-color 0.3s ease-in-out; /* Transição suave ao mudar a cor de fundo */
           }
         </style>
+
+        
     </head>
     <body class="position-relative" data-bs-theme="dark">
         <!-- Início Navbar -->
         <div class="position-fixed w-100 d-flex justify-content-center">
-            <nav class="navbar navbar-expand-lg navbar-dark rounded-pill border shadow-lg w-75">
-                <div class="container px-1">
-                    <button class="bg-primary bg-opacity-10 text-secondary border-0 border p-2 fs-6 rounded-pill lh-1 d-flex align-items-center" type="button">
-                        <i class="bi bi-code-slash pe-2"></i> Dev
-                    </button>
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-dark rounded-pill border shadow-lg">
+                    <div class="d-flex justify-content-between w-100 px-1">
+                        <button class="bg-primary bg-opacity-10 text-secondary border-0 border p-2 fs-6 rounded-pill lh-1 d-flex align-items-center" type="button">
+                            <i class="bi bi-code-slash pe-2"></i> Dev
+                        </button>
 
-                    <button class="navbar-toggler offcanvas-nav-btn" type="button">
-                        <i class="bi bi-list"></i>
-                    </button>
-                    <div class="offcanvas offcanvas-start offcanvas-nav" style="width: 20rem">
-                        <div class="offcanvas-header">
-                            <a href="../../index.html" class="text-inverse"><img src="../assets/images/logo_dev.png" alt /></a>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body pt-0 align-items-center">
-                            <ul class="navbar-nav mx-auto align-items-lg-center">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Skills</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Experiência
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item mb-3 text-body" href="../../docs/index.html">
-                                        <div class="d-flex align-items-center">
-                                            <i class="bi bi-file-text fs-4 text-primary"></i>
-                                            <div class="ms-3 lh-1">
-                                            <h5 class="mb-1">Documentations</h5>
-                                                <p class="mb-0 fs-6">Browse the all documentation</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-body" href="../../docs/changelog.html">
-                                        <div class="d-flex align-items-center">
-                                            <i class="bi bi-clipboard fs-4 text-primary"></i>
-                                            <div class="ms-3 lh-1">
-                                            <h5 class="mb-1">
-                                                Changelog <span class="text-primary ms-1" id="changelog"></span>
-                                                </h5>
-                                                    <p class="mb-0 fs-6">See what's new</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#demo" aria-disabled="true">Demo</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contato" aria-disabled="true">Contato</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex mt-3 mt-lg-0" role="search">
-                            <div class="dropdown">
-                                <button class="btn btn-light btn-icon rounded-circle bg-primary bg-opacity-10 text-primary border-primary d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-                                    <i class="bi theme-icon-active"></i>
-                                    <i class="bi theme-icon bi-moon-stars-fill"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
-                                    <li>
-                                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                                            <i class="bi theme-icon bi-sun-fill"></i>
-                                            <span class="ms-2">Light</span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="true">
-                                            <i class="bi theme-icon bi-moon-stars-fill"></i>
-                                            <span class="ms-2">Dark</span>
-                                        </button>
-                                    </li>
-                                </ul>
+                        <button class="navbar-toggler offcanvas-nav-btn" type="button">
+                            <i class="bi bi-list"></i>
+                        </button>
+                        <div class="offcanvas offcanvas-start offcanvas-nav border rounded-3" style="width: 20rem">
+                            <div class="offcanvas-header">
+                                <a href="#" class="text-inverse"><i class="bi bi-code-slash pe-2"></i> Dev</a>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
-                        </form>
+                            <div class="offcanvas-body pt-0 align-items-center">
+                                <ul class="navbar-nav mx-auto align-items-lg-center">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Experiência</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#skills" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Skills
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item mb-3 text-body" href="../../docs/index.html">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-file-text fs-4 text-primary"></i>
+                                                <div class="ms-3 lh-1">
+                                                <h5 class="mb-1">Documentations</h5>
+                                                    <p class="mb-0 fs-6">Browse the all documentation</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item text-body" href="../../docs/changelog.html">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-clipboard fs-4 text-primary"></i>
+                                                <div class="ms-3 lh-1">
+                                                <h5 class="mb-1">
+                                                    Changelog <span class="text-primary ms-1" id="changelog"></span>
+                                                    </h5>
+                                                        <p class="mb-0 fs-6">See what's new</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#demo" aria-disabled="true">Demo</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contato" aria-disabled="true">Contato</a>
+                                </li>
+                            </ul>
+                            <form class="d-flex mt-3 mt-lg-0" role="search">
+                                <div class="dropdown">
+                                    <button class="btn btn-light btn-icon rounded-circle bg-primary bg-opacity-10 text-primary border-primary d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                                        <i class="bi theme-icon-active"></i>
+                                        <i class="bi theme-icon bi-moon-stars-fill"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
+                                        <li>
+                                            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                                <i class="bi theme-icon bi-sun-fill"></i>
+                                                <span class="ms-2">Light</span>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="true">
+                                                <i class="bi theme-icon bi-moon-stars-fill"></i>
+                                                <span class="ms-2">Dark</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </nav>
-         </div>
-         <!-- Fim Navbar -->
+                </nav>
+            </div>
+        </div>
+        <!-- Fim Navbar -->
 
-         <main>
+        <main>
             <!--Início Home-->
             <div class="pattern-square"></div>
-            <section class="container py-lg-9 py-10 mt-3" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
-               <div class="row justify-content-start">
-                  <div class="col-xl-8 col-lg-10 col-12" data-cues="zoomIn" data-group="page-title" data-delay="700" data-disabled="true">
-                     <div class="text-start d-flex flex-column gap-5" data-cue="zoomIn" data-group="page-title" data-delay="700" data-show="true" style="animation-name: zoomIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 700ms; animation-direction: normal; animation-fill-mode: both;">
-                        <div class="d-flex flex-column justify-content-start gap-3 mx-lg-10 mt-10">
-                           <h1 class="mb-0 display-5">Olá eu sou <span class="text-primary">Vinicius</span></h1>
-                           <h1 class="mb-0 display-5">Full Stack Developer</h1>
-                           <p class="mb-0 lead">Sou um Web Developer e Analistta de dados, projeto e desenvolvo templates, Scripts e soluções performáticas e ao mesmo tempo impressionem os usuários.</p>
+            <section id="home">
+                <div class="container py-lg-9 py-10 mt-3" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                    <div class="row justify-content-start">
+                        <div class="col-xl-8 col-lg-10 col-12" data-cues="zoomIn" data-group="page-title" data-delay="700" data-disabled="true">
+                            <div class="text-start d-flex flex-column gap-5" data-cue="zoomIn" data-group="page-title" data-delay="700" data-show="true" style="animation-name: zoomIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 700ms; animation-direction: normal; animation-fill-mode: both;">
+                                <div class="d-flex flex-column justify-content-start gap-3 mx-lg-10 mt-10">
+                                <h1 class="mb-0 display-5">Olá eu sou <span class="text-primary">Vinicius</span></h1>
+                                <h1 class="mb-0 display-5">Full Stack Developer</h1>
+                                <p class="mb-0 lead text-light-emphasis">Sou um Web Developer e Analista de dados, projeto e desenvolvo templates, Scripts e soluções performáticas e ao mesmo tempo impressionem os usuários.</p>
+                                </div>
+                                <div class="d-flex flex-row gap-2 justify-content-start ms-lg-10">
+                                <a href="#contato" class="btn btn-primary">Contatar</a>
+                                <a href="#demo" class="btn btn-light">Mais</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-flex flex-row gap-2 justify-content-start ms-lg-10">
-                           <a href="#contato" class="btn btn-primary">Contatar</a>
-                           <a href="#demo" class="btn btn-light">Mais</a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </section>
+            
             <!--Fim Home-->
 
+            <!--Início Sobre mim-->
+            <section class="py-lg-9 py-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="text-center mb-xl-7 mb-5">
+                                <h2 class="mb-3">
+                                    Sobre
+                                    <span class="text-primary">mim</span>
+                                </h2>
+                                <p class="mb-0">
+                                    Enim sed parturient sem enim nunc sit erat velit
+                                    eget hac nulla nullam et id praesent nisi ornare
+                                    risus risus consequat nunc nisl pellentesque diam
+                                    neque.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-xl-5 col-md-6 col-12">
+                            <div class="nav flex-column nav-pills mb-5 mb-lg-0"
+                                id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <a href="#"
+                                    class="nav-link active d-flex text-start align-items-center align-items-lg-start p-xl-4 p-3"
+                                    id="v-pills-small-business-tab"
+                                    data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-small-business" role="tab"
+                                    aria-controls="v-pills-small-business"
+                                    aria-selected="true">
+                                    <div class="d-flex">
+                                        <div
+                                            class="icon-md icon-shape rounded-circle bg-white shadow-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="18" height="18"
+                                                fill="currentColor"
+                                                class="bi bi-bank2 text-primary"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916l-7.5-5zM12.375 6v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1H.5z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h4 class="mb-0">Frontend Developer</h4>
+                                        <p class="mb-0 mt-lg-3 d-none d-lg-block">
+                                            Interdum et malesuad a fames ac ante ipsum
+                                            primis in faucibus. Simple dummy content.
+                                            Sed lacinia gsmod dui euismod id.
+                                        </p>
+                                    </div>
+                                </a>
+                                <a href="#"
+                                    class="nav-link d-flex text-start align-items-center align-items-lg-start p-xl-4 p-3"
+                                    id="v-pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-profile" role="tab"
+                                    aria-controls="v-pills-profile"
+                                    aria-selected="false">
+                                    <div class="d-flex">
+                                        <div
+                                            class="icon-md icon-shape rounded-circle bg-white shadow-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="18" height="18"
+                                                fill="currentColor"
+                                                class="bi bi-credit-card-2-front-fill text-primary"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h4 class="mb-0">BackEnd Developer</h4>
+                                        <p class="mb-0 mt-lg-3 d-none d-lg-block">
+                                            Nullam sodales, libero ac dictum convallis,
+                                            ipsum diam cursus stibulum lacinia ultricies
+                                            eleifend. Simple dummy content.
+                                        </p>
+                                    </div>
+                                </a>
+                                <a href="#"
+                                    class="nav-link d-flex text-start p-xl-4 p-3 align-items-center align-items-lg-start"
+                                    id="v-pills-enterprises-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-enterprises" role="tab"
+                                    aria-controls="v-pills-enterprises"
+                                    aria-selected="false">
+                                    <div class="d-flex">
+                                        <div
+                                            class="icon-md icon-shape rounded-circle bg-white shadow-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="18" height="18"
+                                                fill="currentColor"
+                                                class="bi bi-cash-stack text-primary"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                                                <path
+                                                    d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h4 class="mb-0">DBA</h4>
+                                        <p class="mb-0 mt-lg-3 d-none d-lg-block">
+                                            In a odio sit amet nisi tincidunt congue.
+                                            Mauris cursus magna a vestibulum rutrum.
+                                            Vivamus sit amet luctus leo. Simple dummy
+                                            content.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 offset-xl-1 col-md-6 col-12">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active"
+                                    id="v-pills-small-business" role="tabpanel"
+                                    aria-labelledby="v-pills-small-business-tab"
+                                    tabindex="0">
+                                    <div class="position-relative scene"
+                                        data-relative-input="true">
+                                        <figure><img
+                                                src="assets/images/personal/personal-1.jpeg"
+                                                alt="finance"
+                                                class="img-fluid rounded-3"></figure>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-profile"
+                                    role="tabpanel"
+                                    aria-labelledby="v-pills-profile-tab" tabindex="0">
+                                    <div class="position-relative scene"
+                                        data-relative-input="true">
+                                        <figure><img
+                                                src="assets/images/personal/personal-2.png"
+                                                alt="finance"
+                                                class="img-fluid w-100 rounded-3"></figure>
+                                    </div>
+                                </div>
+  
+                                <div class="tab-pane fade" id="v-pills-enterprises"
+                                    role="tabpanel"
+                                    aria-labelledby="v-pills-enterprises-tab"
+                                    tabindex="0">
+                                    <div class="position-relative scene"
+                                        data-relative-input="true">
+                                        <figure><img
+                                                src="assets/images/personal/personal-3.png"
+                                                alt="finance"
+                                                class="img-fluid rounded-3" /></figure>
+  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Fim Sobre mim-->
+
+            <!--Início Resumo de frameworks e linguagens-->
+            <section id="skills" class="py-lg-9 py-6 bg-gray-200">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2 col-md-12">
+                            <div class="text-center mb-5 mb-lg-8">
+                                <h2 class="mt-4">Skills</h2>
+                                <p class="mb-0 px-xl-9 text-light-emphasis">
+                                    Possuo conhecimento em integrar e desenvolver soluções para
+                                    <span class="text-primary">todas</span>
+                                    as tecnologias abaixo, de acordo com seu modelo de negócio.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+  
+                    <div class="marquee text-center" style="max-height: 100px">
+                        <div class="track!" style="max-height: 100px">
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/html5.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">HTML5</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img style="object-fit: cover;" src="assets/images/resume/css3.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">CSS3</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/bootstrap-logo.svg"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">Bootstrap 5</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/js.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">Javascript</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/typescript.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">TypeScript</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/python.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">Python</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/django.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">Django</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/react.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">React</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="marquee text-center" style="height: 100px">
+                        <div class="track-2!" style="height: 100px">
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/next-js.svg"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">NextJS</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/vue.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">Vue</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/php.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">PHP</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/laravel.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">Laravel</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/powerbi.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">Power BI</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/sqlserver.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">SQL Server</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/mysql.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">MySQL</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/github.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+  
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-center mt-lg-4">
+                                <a href="#contato" class="btn btn-dark">Conhecer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Fim Resumo de frameworks e linguagens-->
+
+            <!--Portfolio start-->
+            <section class="py-xl-9 py-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 offset-xl-3 col-md-12">
+                            <div class="text-center mb-lg-7 mb-5">
+                                <h2 class="mt-5 px-lg-10 px-6">
+                                    Algumas de minhas 
+                                    <span class="text-primary">experiencias.</span>
+                                </h2>
+                                <p class="mb-0">
+                                    Aqui estão alguns items que trabalho a mais de 
+                                    <span class="text-dark">4 anos</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive-xl pb-5">
+                        <div class="row flex-nowrap">
+                            <div class="col-lg-4 col-md-6">
+                                <a href="#!">
+                                    <div class="card card-lift h-100 d-flex">
+                                        <div class="card-body pb-0">
+                                            <div class="mb-6">
+                                                <h3 class="h4 mb-4">JAMstack & Headless
+                                                    web development agency</h3>
+                                                <span
+                                                    class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Figma</span>
+                                                <span
+                                                    class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Bootstrap</span>
+                                            </div>
+                                            <img src="assets/images/personal/personal-1.jpeg"
+                                                alt="portfolio"
+                                                class="img-fluid rounded-top shadow-sm" />
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <a href="#!">
+                                    <div class="card card-lift h-100 d-flex">
+                                        <div class="card-body pb-0">
+                                            <div class="mb-6">
+                                                <h3 class="h4 mb-4">Banking and Finance
+                                                    landing page design</h3>
+                                                <span
+                                                    class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">UI
+                                                    Design</span>
+                                                <span
+                                                    class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Next.js</span>
+                                            </div>
+
+                                            <img src="assets/images/personal/personal-2.png"
+                                                alt="portfolio"
+                                                class="img-fluid rounded-top shadow-sm" />
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <a href="#!">
+                                    <div class="card card-lift h-100 d-flex">
+                                        <div class="card-body pb-0">
+                                            <div class="mb-6">
+                                                <h3 class="h4 mb-4">Accounting software
+                                                    web app development</h3>
+                                                <span
+                                                    class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Web
+                                                    Development</span>
+                                                <span
+                                                    class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">React
+                                                    JS</span>
+                                            </div>
+                                            <img src="assets/images/personal/personal-3.png"
+                                                alt="portfolio"
+                                                class="img-fluid rounded-top shadow-sm" />
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Portfolio end-->
+
             <!--Início Contato-->
-            <section class="py-lg-9 py-10" id="contato">
+            <section class="pt-lg-9 pt-10" id="contato">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-10 offset-lg-1 col-md-12">
@@ -282,7 +687,7 @@
         </main>
 
          <!-- Footer -->
-         <footer class="pt-7">
+         <footer>
             <div class="container mt-7 pt-lg-7 pb-4">
                 <div class="row align-items-center">
                     <div class="col-md-12">
@@ -303,6 +708,20 @@
                 <path d="M8 1H32C35.866 1 39 4.13401 39 8V32C39 35.866 35.866 39 32 39H8C4.13401 39 1 35.866 1 32V8C1 4.13401 4.13401 1 8 1Z" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 139.989, 139.989; stroke-dashoffset: 139.989;"></path>
             </svg>
         </div>
+
+        <script>
+            VANTA.WAVES({
+            el: "#home",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x1e
+            })
+        </script>
 
         <!-- Bootstrap 5.3 JS Bundle (opcional, para funcionalidades como dropdowns, popovers, etc.) -->
         <script src="./assets/libs/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
