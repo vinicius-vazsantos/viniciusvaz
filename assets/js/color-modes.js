@@ -1,1 +1,81 @@
-(()=>{"use strict";const t=()=>localStorage.getItem("theme"),a=()=>{var e=t();return e||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")},r=e=>{"auto"===e&&window.matchMedia("(prefers-color-scheme: dark)").matches?document.documentElement.setAttribute("data-bs-theme","dark"):document.documentElement.setAttribute("data-bs-theme",e)},c=(r(a()),(e,t=!1)=>{var a=document.querySelector(".bs-theme-text"),r=document.querySelector(`[data-bs-theme-value="${e}"]`);document.querySelectorAll("[data-bs-theme-value]").forEach(e=>{e.classList.remove("active"),e.setAttribute("aria-pressed","false")}),r.classList.add("active"),r.setAttribute("aria-pressed","true"),a.textContent,r.dataset.bsThemeValue;a=e,e=document.querySelector(".theme-icon-active"),a=document.querySelector(`[data-bs-theme-value="${a}"] .theme-icon`),e&&a&&(e.innerHTML=a.outerHTML),t&&r.focus()});window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{var e=t();"light"!==e&&"dark"!==e&&r(a())}),window.addEventListener("DOMContentLoaded",()=>{c(a()),document.querySelectorAll("[data-bs-theme-value]").forEach(t=>{t.addEventListener("click",()=>{var e=t.getAttribute("data-bs-theme-value");localStorage.setItem("theme",e),r(e),c(e,!0)})})})})();
+(() => {
+    "use strict";
+
+    // Função para obter o tema atual do localStorage ou do sistema
+    const getTheme = () => localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+    // Função para definir o tema no localStorage e no <body>
+    const setTheme = (theme) => {
+        localStorage.setItem("theme", theme);
+        document.body.dataset.bsTheme = theme;
+        updateVantaColor(theme);
+        updateNavbarClass(theme);
+        updateActiveButton(theme);
+    };
+
+    // Função para atualizar a cor do Vanta.js com base no tema
+    const updateVantaColor = (theme) => {
+        const vantaColor = theme === "dark" ? 0x1a2d : 0xa4a4a4;
+        if (window.VANTA && window.VANTA.WAVES) {
+            window.VANTA.WAVES({
+                el: "#home",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: vantaColor
+            });
+        }
+    };
+
+    // Função para atualizar a classe do navbar com base no tema
+    const updateNavbarClass = (theme) => {
+        const navbar = document.querySelector("nav.navbar");
+        if (navbar) {
+            if (theme === "dark") {
+                navbar.classList.remove("navbar-light");
+                navbar.classList.add("navbar-dark");
+            } else {
+                navbar.classList.remove("navbar-dark");
+                navbar.classList.add("navbar-light");
+            }
+        }
+    };
+
+    // Função para atualizar o botão ativo com base no tema
+    const updateActiveButton = (theme) => {
+        document.querySelectorAll("[data-bs-theme-value]").forEach(button => {
+            if (button.getAttribute("data-bs-theme-value") === theme) {
+                button.classList.add("active");
+                button.setAttribute("aria-pressed", "true");
+            } else {
+                button.classList.remove("active");
+                button.setAttribute("aria-pressed", "false");
+            }
+        });
+    };
+
+    // Event listener para alterações no tema preferido do sistema
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+        if (getTheme() === "auto") {
+            setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        }
+    });
+
+    // Event listener quando o DOM é carregado
+    window.addEventListener("DOMContentLoaded", () => {
+        // Definir o tema no <body> ao carregar a página
+        setTheme(getTheme());
+
+        // Adicionar event listeners aos botões do tema
+        document.querySelectorAll("[data-bs-theme-value]").forEach(button => {
+            button.addEventListener("click", () => {
+                const newTheme = button.getAttribute("data-bs-theme-value");
+                setTheme(newTheme);
+            });
+        });
+    });
+})();

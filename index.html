@@ -8,7 +8,6 @@
         <!-- Bootstrap 5.3 CSS -->
         <script async="" src="https://www.clarity.ms/s/0.7.24/clarity.js"></script>
         <script async="" src="https://www.clarity.ms/tag/kss8za9j58"></script>
-        <script src="./assets/js/color-modes.js"></script>
 
         <link rel="stylesheet" href="./assets/css/bootstrap-icons-1.11.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="./assets/libs/scrollcue/scrollCue.css">
@@ -17,13 +16,21 @@
 
         <script src="./assets/libs/threejs/three.min.js"></script>
         <script src="./assets/libs/vanta/vanta.waves.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
+
 
         <style>
           .position-fixed {
             z-index: 1000;
           }
-          .navbar {
+          body[data-bs-theme="dark"] .navbar {
             background-color: rgba(2, 22, 42, 0.8) !important; /* Cor de fundo com transparência */
+            backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+            transition: background-color 0.3s ease-in-out; /* Transição suave ao mudar a cor de fundo */
+          }
+
+          body[data-bs-theme="light"] .navbar {
+            background-color: rgba(255, 255, 255, 0.8) !important; /* Cor de fundo com transparência */
             backdrop-filter: blur(10px); /* Efeito de vidro fosco */
             transition: background-color 0.3s ease-in-out; /* Transição suave ao mudar a cor de fundo */
           }
@@ -44,7 +51,7 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-dark rounded-pill border shadow-lg">
                     <div class="d-flex justify-content-between w-100 px-1">
-                        <button class="bg-primary bg-opacity-10 text-secondary border-0 border p-2 fs-6 rounded-pill lh-1 d-flex align-items-center" type="button">
+                        <button class="btn btn-light border p-2 fs-6 rounded-pill lh-1 d-flex align-items-center" type="button">
                             <i class="bi bi-code-slash pe-2"></i> Dev
                         </button>
 
@@ -107,7 +114,7 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
                                         <li>
-                                            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
                                                 <i class="bi theme-icon bi-sun-fill"></i>
                                                 <span class="ms-2">Light</span>
                                             </button>
@@ -545,30 +552,28 @@
                         <div class="col-xl-6 offset-xl-3 col-md-12">
                             <div class="text-center mb-lg-7 mb-5">
                                 <h2 class="mt-5 px-lg-10 px-6">
-                                    Veja uma  
+                                    Veja uma pequena 
                                     <span class="text-primary">demonstração</span>
-                                    das minhas habilidades
                                 </h2>
-
                             </div>
                         </div>
                     </div>
                     <div class="table-responsive-xl pb-5">
                         <div class="row flex-nowrap">
                             <div class="col-md-12">
-                                    <div class="card card-lift h-100 d-flex">
-                                        <div class="card-body pb-0">
-                                            <div class="mb-6">
-                                                <h3 class="h4">Power BI</h3>
-                                                <p class="mb-0 fs-6">Analista de dados(2019 -2024).</p>
-                                                <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">ETL</span>
-                                                <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">MySQL</span>
-                                                <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">SQLServer</span>
-                                                <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Python</span>
-                                            </div>
-                                            <div id="container"></div>
+                                <div class="card card-lift h-100 d-flex">
+                                    <div class="card-body pb-0">
+                                        <div class="mb-6">
+                                            <h3 class="h4">Power BI</h3>
+                                            <p class="mb-0 fs-6">Analista de dados(2019 -2024).</p>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">ETL</span>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">MySQL</span>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">SQLServer</span>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Python</span>
                                         </div>
+                                        <div id="container"></div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -746,55 +751,88 @@
             </svg>
         </div>
 
-        <script>
-            VANTA.WAVES({
-            el: "#home",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x1a2d
-            })
-        </script>
+        <script type="module">
+            import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.module.js';
+            import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/controls/OrbitControls.js';
 
-        <script>
-            /*
-            // Crie uma cena, uma câmera e um renderizador
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.getElementById('container').appendChild(renderer.domElement);
 
-            // Carregue o modelo GLB
-            const loader = new THREE.GLTFLoader();
-            loader.load('.assets/model/ducati_panigale_v4.glb', function (gltf) {
-                scene.add(gltf.scene);
+            // Variáveis globais para a cena, câmera, renderizador e controles de órbita
+            let scene, camera, renderer, controls;
+
+            // Função para carregar e renderizar o modelo 3D .glb
+            const init = () => {
+                // Cena
+                scene = new THREE.Scene();
+
+                // Câmera
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.set(0, 0, 10);
+
+                // Luz ambiente
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambientLight);
+
+                // Luz direcional
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(0, 1, 0);
+                scene.add(directionalLight);
+
+                // Renderizador
+                renderer = new THREE.WebGLRenderer();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                document.getElementById('container').appendChild(renderer.domElement);
+
+                // GLTF Loader
+                const loader = new THREE.GLTFLoader();
+                loader.load(
+                    './assets/models/yamaha_r3.glb',
+                    (gltf) => {
+                        scene.add(gltf.scene);
+                    },
+                    undefined,
+                    (error) => {
+                        console.error('Erro ao carregar modelo GLB', error);
+                    }
+                );
+
+                // Controles de órbita
+                controls = new OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true; // Adiciona amortecimento aos controles
+                controls.dampingFactor = 0.25;
+                controls.rotateSpeed = 0.35;
+                controls.enableZoom = true;
+
+                // Event listener para ajustar a renderização ao redimensionar a janela
+                window.addEventListener('resize', onWindowResize);
+
+                // Função para atualizar a renderização
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    controls.update(); // Atualiza os controles de órbita
+                    renderer.render(scene, camera);
+                };
+
+                animate();
+            };
+
+            // Função para ajustar a renderização ao redimensionar a janela
+            const onWindowResize = () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            };
+
+            // Carregar o modelo 3D .glb ao carregar o DOM
+            window.addEventListener('DOMContentLoaded', () => {
+                init();
             });
-
-            // Adicione luz para iluminar o modelo (opcional)
-            const light = new THREE.PointLight(0xffffff, 1, 100);
-            light.position.set(0, 0, 10);
-            scene.add(light);
-
-            // Atualize a posição da câmera
-            camera.position.z = 5;
-
-            // Função de renderização
-            function animate() {
-                requestAnimationFrame(animate);
-                renderer.render(scene, camera);
-            }
-            animate();*/
         </script>
 
         <!-- Bootstrap 5.3 JS Bundle (opcional, para funcionalidades como dropdowns, popovers, etc.) -->
         <script src="./assets/libs/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
 
         <!-- Theme JS -->
+        <script src="./assets/js/color-modes.js"></script>
         <script src="./assets/js/theme.min.js"></script>
         <script src="./assets/libs/scrollcue/scrollCue.min.js"></script>
     </body>
