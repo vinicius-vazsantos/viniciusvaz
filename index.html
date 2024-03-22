@@ -40,6 +40,15 @@
             height: 200px;
             object-fit: cover;
           }
+
+          #containerR3 {
+            position: relative;
+            width: 100%; /* Largura será definida dinamicamente */
+            height: 500px; /* Altura de exemplo */
+          }
+          #containerR3 canvas {
+            border-radius: 15px !important;
+          }
           
         </style>
 
@@ -137,6 +146,7 @@
 
         <main>
             <!--Início Home-->
+            
             <section id="home">
                 <div class="container py-lg-9 py-10 mt-3" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                     <div class="row justify-content-start">
@@ -562,16 +572,19 @@
                         <div class="row flex-nowrap">
                             <div class="col-md-12">
                                 <div class="card card-lift h-100 d-flex">
-                                    <div class="card-body pb-0">
+                                    <div class="card-body">
                                         <div class="mb-6">
-                                            <h3 class="h4">Power BI</h3>
-                                            <p class="mb-0 fs-6">Analista de dados(2019 -2024).</p>
-                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">ETL</span>
-                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">MySQL</span>
-                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">SQLServer</span>
-                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Python</span>
+                                            <h3 class="h4">Modelo 3D - Threejs & CropperJS</h3>
+                                            <p class="mb-0 fs-6">Visualize e navegue pelo modelo 3D da Yamaha R3 descobrindo toda sua ficha técnica.</p>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Threejs</span>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">GLTF</span>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">TweenJs</span>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">OrbitControls</span>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">CropperJS</span>
                                         </div>
-                                        <div id="container"></div>
+                                        <div id="containerR3">
+                                            <div class="pattern-square"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -751,81 +764,171 @@
             </svg>
         </div>
 
-        <script type="module">
-            import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.module.js';
-            import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.134.0/examples/jsm/controls/OrbitControls.js';
+        <!-- Carrega as libs necessárias para renderizar o modelo -->
+        <script src="./assets/libs/threejs/jsm/loaders/GLTFLoader.js"></script>
+        <script src="./assets/libs/threejs/jsm/@tweenjs/tween.umd.js"></script>
+        <script src="./assets/libs/threejs/jsm/controls/OrbitControls.js"></script>
+        <!-- <script src="./assets/libs/threejs/jsm/renderers/CSS2DRenderer.js"></script> -->
 
+        <script>
+            // Variável de controle de rotação
+            let rotating = true;
 
-            // Variáveis globais para a cena, câmera, renderizador e controles de órbita
-            let scene, camera, renderer, controls;
+            // Calcula e define o tamanho da cena dinamicamente
+            const container = document.getElementById('containerR3');
+            const parentWidth = container.offsetWidth;
 
-            // Função para carregar e renderizar o modelo 3D .glb
-            const init = () => {
-                // Cena
-                scene = new THREE.Scene();
+            // Configuração da cena
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color( 0x404B5C );
+            const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10000);
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(parentWidth, 500);
+            document.getElementById('containerR3').appendChild(renderer.domElement);
+            
+            camera.position.set(6, 0, -5);
+            camera.layers.enableAll();
 
-                // Câmera
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.set(0, 0, 10);
+            // Luz Ambiente
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
+            scene.add(ambientLight);
 
-                // Luz ambiente
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-                scene.add(ambientLight);
+            // Luz Direcional
+            const directionalLight = new THREE.DirectionalLight(0xffffff);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
 
-                // Luz direcional
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-                directionalLight.position.set(0, 1, 0);
-                scene.add(directionalLight);
+            // Array de anotações
+            const annotations = [
+                {
+                    position: new THREE.Vector3(-5, 1, -23.5),
+                    content: '1',
+                    lookAt: new THREE.Vector3(-5, 1, -19.5),
+                    value: 'Cilindrada:	 320,6 cc',
+                    id: 'cilindrada',
+                    icon: 'fas fa-chart-bar',
+                    title: 'Motor',
+                },
+                {
+                    position: new THREE.Vector3(-2.5, 2, -23.5),
+                    content: '2',
+                    lookAt: new THREE.Vector3(-2.5, 2, -21.5),
+                    value: '3,02 kgfm @ 9.000 rpm',
+                    id: 'torque',
+                    icon: 'fa-solid fa-bolt',
+                    title: 'Torque',
+                },
+                {
+                    position: new THREE.Vector3(-0.5, 5.5, -16.8),
+                    content: '3',
+                    lookAt: new THREE.Vector3(-0.5, 7.5, -13),
+                    value: '42,01 cv @ 10.750 rpm',
+                    id: 'potencia',
+                    icon: 'fa-solid fa-bolt',
+                    title: 'Potência',
+                },
+            ];
 
-                // Renderizador
-                renderer = new THREE.WebGLRenderer();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                document.getElementById('container').appendChild(renderer.domElement);
+            // Função para criar e adicionar os labels ao modelo
+            // function addLabelsToModel(model) {
+            //     const labelContainer = new THREE.Object3D();
+            //     scene.add(labelContainer);
 
-                // GLTF Loader
-                const loader = new THREE.GLTFLoader();
-                loader.load(
-                    './assets/models/yamaha_r3.glb',
-                    (gltf) => {
-                        scene.add(gltf.scene);
-                    },
-                    undefined,
-                    (error) => {
-                        console.error('Erro ao carregar modelo GLB', error);
+            //     annotations.forEach(annotation => {
+            //         const labelDiv = document.createElement('div');
+            //         labelDiv.className = 'label-3d';
+            //         labelDiv.textContent = annotation.content;
+                    
+            //         const labelObject = new THREE.CSS2DObject(labelDiv);
+            //         labelObject.position.copy(annotation.position);
+            //         labelContainer.add(labelObject);
+            //     });
+
+            //     // Adicionar o labelContainer ao modelo para movê-lo junto com o modelo
+            //     model.add(labelContainer);
+            // }
+
+            // Carrega o GLTF
+            const loader = new THREE.GLTFLoader();
+            loader.load('./assets/models/yamaha_r3.glb', (gltf) => {
+                const model = gltf.scene;
+                scene.add(model);
+
+                // Adicionar os labels ao modelo carregado
+                // addLabelsToModel(model);
+
+                // Inicia a rotação do modelo
+                function rotateModel() {
+                    if (rotating) {
+                        model.rotation.y += 0.005; // Ajusta a velocidade de rotação
                     }
-                );
+                    requestAnimationFrame(rotateModel);
+                }
+                rotateModel();
 
-                // Controles de órbita
-                controls = new OrbitControls(camera, renderer.domElement);
-                controls.enableDamping = true; // Adiciona amortecimento aos controles
-                controls.dampingFactor = 0.25;
-                controls.rotateSpeed = 0.35;
-                controls.enableZoom = true;
+                // Evento Sobre o container
+                container.addEventListener('mouseenter', () => {
+                    rotating = false;
+                });
 
-                // Event listener para ajustar a renderização ao redimensionar a janela
-                window.addEventListener('resize', onWindowResize);
+                container.addEventListener('mouseleave', () => {
+                    rotating = true;
+                });
 
-                // Função para atualizar a renderização
-                const animate = () => {
-                    requestAnimationFrame(animate);
-                    controls.update(); // Atualiza os controles de órbita
-                    renderer.render(scene, camera);
-                };
+                // Labels
+                const labelsContainer = document.getElementById('labels');
 
-                animate();
-            };
+                const label1 = createLabel('Label 1', { x: 0, y: 0, z: 0 });
+                const label2 = createLabel('Label 2', { x: 2, y: 0, z: 0 });
 
-            // Função para ajustar a renderização ao redimensionar a janela
-            const onWindowResize = () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            };
+                labelsContainer.appendChild(label1);
+                labelsContainer.appendChild(label2);
 
-            // Carregar o modelo 3D .glb ao carregar o DOM
-            window.addEventListener('DOMContentLoaded', () => {
-                init();
+                // Event listeners for labels
+                label1.addEventListener('click', () => {
+                    moveCameraToElement({ x: 0, y: 0, z: 0 }, { x: 5, y: 5, z: 5 });
+                });
+
+                label2.addEventListener('click', () => {
+                    moveCameraToElement({ x: 2, y: 0, z: 0 }, { x: -5, y: 5, z: -5 });
+                });
             });
+
+            // Controle de Orbita
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.25;
+            controls.screenSpacePanning = false;
+            controls.minDistance = 5;
+            controls.maxDistance = 50;
+            controls.maxPolarAngle = Math.PI / 2;
+
+            // Função para criar o label
+            function createLabel(text, position) {
+                const labelDiv = document.createElement('div');
+                labelDiv.className = 'label';
+                labelDiv.textContent = text;
+
+                const label = new THREE.CSS2DObject(labelDiv);
+                label.position.copy(position);
+
+                return labelDiv;
+            }
+
+            // Função para mover a camera para o elemento
+            function moveCameraToElement(targetPosition, cameraPosition) {
+                camera.position.copy(cameraPosition);
+                camera.lookAt(targetPosition);
+            }
+
+            // Render loop
+            function animate() {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+                controls.update();
+                // console.log(camera.position)
+            }
+            animate();
         </script>
 
         <!-- Bootstrap 5.3 JS Bundle (opcional, para funcionalidades como dropdowns, popovers, etc.) -->
