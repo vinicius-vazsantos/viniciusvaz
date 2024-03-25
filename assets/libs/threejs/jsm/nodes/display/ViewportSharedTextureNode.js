@@ -2,20 +2,21 @@ import ViewportTextureNode from './ViewportTextureNode.js';
 import { addNodeClass } from '../core/Node.js';
 import { addNodeElement, nodeProxy } from '../shadernode/ShaderNode.js';
 import { viewportTopLeft } from './ViewportNode.js';
+import { FramebufferTexture } from 'three';
 
-let rtt = null;
+let _sharedFramebuffer = null;
 
 class ViewportSharedTextureNode extends ViewportTextureNode {
 
-	constructor( uv = viewportTopLeft ) {
+	constructor( uvNode = viewportTopLeft, levelNode = null ) {
 
-		super( uv );
+		if ( _sharedFramebuffer === null ) {
 
-	}
+			_sharedFramebuffer = new FramebufferTexture();
 
-	constructRTT( builder ) {
+		}
 
-		return rtt || ( rtt = builder.getRenderTarget() );
+		super( uvNode, levelNode, _sharedFramebuffer );
 
 	}
 
@@ -27,4 +28,4 @@ export const viewportSharedTexture = nodeProxy( ViewportSharedTextureNode );
 
 addNodeElement( 'viewportSharedTexture', viewportSharedTexture );
 
-addNodeClass( ViewportSharedTextureNode );
+addNodeClass( 'ViewportSharedTextureNode', ViewportSharedTextureNode );

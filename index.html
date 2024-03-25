@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Portifólio Vinicius Vaz</title>
+        <link rel="shortcut icon" type="image/svg" href="./assets/images/code-slash.svg"/>
 
         <!-- Bootstrap 5.3 CSS -->
         <script async="" src="https://www.clarity.ms/s/0.7.24/clarity.js"></script>
@@ -16,8 +17,6 @@
 
         <script src="./assets/libs/threejs/three.min.js"></script>
         <script src="./assets/libs/vanta/vanta.waves.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
-
 
         <style>
           .position-fixed {
@@ -41,15 +40,28 @@
             object-fit: cover;
           }
 
-          #containerR3 {
+          #containerBMW {
             position: relative;
             width: 100%; /* Largura será definida dinamicamente */
             height: 500px; /* Altura de exemplo */
           }
-          #containerR3 canvas {
+          #containerBMW canvas {
             border-radius: 15px !important;
+            z-index: 0;
           }
-          
+          .annotation-btn {
+            position: absolute;
+            /* display: block; */
+            background-color: #475569;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            user-select: none;
+            font-size: 0.8rem;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            z-index: 1;
+          }
         </style>
 
         
@@ -582,8 +594,19 @@
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">OrbitControls</span>
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">CropperJS</span>
                                         </div>
-                                        <div id="containerR3">
-                                            <div class="pattern-square"></div>
+                                        <div id="containerBMW" class="position-relative">
+                                            <div class="d-grid gap-2 d-md-block position-absolute text-end w-100 pt-2 pe-2" style="z-index: 10;">
+                                                <button id="changeRotate" type="button" class="btn btn-icon btn-linkedin text-reset">
+                                                    <i class="bi bi-arrow-counterclockwise fs-4"></i>
+                                                </button>
+                                                <button id="pauseRotate" type="button" class="btn btn-icon btn-linkedin text-reset">
+                                                    <i class="bi bi-pause-circle fs-4"></i>
+                                                </button>
+                                                <button id="downloadImage" type="button" class="btn btn-icon btn-linkedin text-reset">
+                                                    <i class="bi bi-camera"></i>
+                                                </button>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -765,177 +788,28 @@
         </div>
 
         <!-- Carrega as libs necessárias para renderizar o modelo -->
-        <script src="./assets/libs/threejs/jsm/loaders/GLTFLoader.js"></script>
-        <script src="./assets/libs/threejs/jsm/@tweenjs/tween.umd.js"></script>
-        <script src="./assets/libs/threejs/jsm/controls/OrbitControls.js"></script>
-        <!-- <script src="./assets/libs/threejs/jsm/renderers/CSS2DRenderer.js"></script> -->
+        <!-- <script src="./assets/libs/threejs/jsm/loaders/GLTFLoader.js"></script> -->
+        <!-- <script src="./assets/libs/threejs/jsm/@tweenjs/tween.umd.js"></script> -->
+        <!-- <script src="./assets/libs/threejs/jsm/controls/OrbitControls.js"></script> -->
 
-        <script>
-            // Variável de controle de rotação
-            let rotating = true;
-
-            // Calcula e define o tamanho da cena dinamicamente
-            const container = document.getElementById('containerR3');
-            const parentWidth = container.offsetWidth;
-
-            // Configuração da cena
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color( 0x404B5C );
-            const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10000);
-            const renderer = new THREE.WebGLRenderer();
-            renderer.setSize(parentWidth, 500);
-            document.getElementById('containerR3').appendChild(renderer.domElement);
-            
-            camera.position.set(6, 0, -5);
-            camera.layers.enableAll();
-
-            // Luz Ambiente
-            const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
-            scene.add(ambientLight);
-
-            // Luz Direcional
-            const directionalLight = new THREE.DirectionalLight(0xffffff);
-            directionalLight.position.set(1, 1, 1);
-            scene.add(directionalLight);
-
-            // Array de anotações
-            const annotations = [
-                {
-                    position: new THREE.Vector3(-5, 1, -23.5),
-                    content: '1',
-                    lookAt: new THREE.Vector3(-5, 1, -19.5),
-                    value: 'Cilindrada:	 320,6 cc',
-                    id: 'cilindrada',
-                    icon: 'fas fa-chart-bar',
-                    title: 'Motor',
-                },
-                {
-                    position: new THREE.Vector3(-2.5, 2, -23.5),
-                    content: '2',
-                    lookAt: new THREE.Vector3(-2.5, 2, -21.5),
-                    value: '3,02 kgfm @ 9.000 rpm',
-                    id: 'torque',
-                    icon: 'fa-solid fa-bolt',
-                    title: 'Torque',
-                },
-                {
-                    position: new THREE.Vector3(-0.5, 5.5, -16.8),
-                    content: '3',
-                    lookAt: new THREE.Vector3(-0.5, 7.5, -13),
-                    value: '42,01 cv @ 10.750 rpm',
-                    id: 'potencia',
-                    icon: 'fa-solid fa-bolt',
-                    title: 'Potência',
-                },
-            ];
-
-            // Função para criar e adicionar os labels ao modelo
-            // function addLabelsToModel(model) {
-            //     const labelContainer = new THREE.Object3D();
-            //     scene.add(labelContainer);
-
-            //     annotations.forEach(annotation => {
-            //         const labelDiv = document.createElement('div');
-            //         labelDiv.className = 'label-3d';
-            //         labelDiv.textContent = annotation.content;
-                    
-            //         const labelObject = new THREE.CSS2DObject(labelDiv);
-            //         labelObject.position.copy(annotation.position);
-            //         labelContainer.add(labelObject);
-            //     });
-
-            //     // Adicionar o labelContainer ao modelo para movê-lo junto com o modelo
-            //     model.add(labelContainer);
-            // }
-
-            // Carrega o GLTF
-            const loader = new THREE.GLTFLoader();
-            loader.load('./assets/models/yamaha_r3.glb', (gltf) => {
-                const model = gltf.scene;
-                scene.add(model);
-
-                // Adicionar os labels ao modelo carregado
-                // addLabelsToModel(model);
-
-                // Inicia a rotação do modelo
-                function rotateModel() {
-                    if (rotating) {
-                        model.rotation.y += 0.005; // Ajusta a velocidade de rotação
-                    }
-                    requestAnimationFrame(rotateModel);
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "./assets/libs/threejs/build/three.module.js",
+                    "three/addons/": "./assets/libs/threejs/jsm/",
+                    "@tweenjs/tween.js": "https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.esm.js"
                 }
-                rotateModel();
-
-                // Evento Sobre o container
-                container.addEventListener('mouseenter', () => {
-                    rotating = false;
-                });
-
-                container.addEventListener('mouseleave', () => {
-                    rotating = true;
-                });
-
-                // Labels
-                const labelsContainer = document.getElementById('labels');
-
-                const label1 = createLabel('Label 1', { x: 0, y: 0, z: 0 });
-                const label2 = createLabel('Label 2', { x: 2, y: 0, z: 0 });
-
-                labelsContainer.appendChild(label1);
-                labelsContainer.appendChild(label2);
-
-                // Event listeners for labels
-                label1.addEventListener('click', () => {
-                    moveCameraToElement({ x: 0, y: 0, z: 0 }, { x: 5, y: 5, z: 5 });
-                });
-
-                label2.addEventListener('click', () => {
-                    moveCameraToElement({ x: 2, y: 0, z: 0 }, { x: -5, y: 5, z: -5 });
-                });
-            });
-
-            // Controle de Orbita
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.25;
-            controls.screenSpacePanning = false;
-            controls.minDistance = 5;
-            controls.maxDistance = 50;
-            controls.maxPolarAngle = Math.PI / 2;
-
-            // Função para criar o label
-            function createLabel(text, position) {
-                const labelDiv = document.createElement('div');
-                labelDiv.className = 'label';
-                labelDiv.textContent = text;
-
-                const label = new THREE.CSS2DObject(labelDiv);
-                label.position.copy(position);
-
-                return labelDiv;
             }
-
-            // Função para mover a camera para o elemento
-            function moveCameraToElement(targetPosition, cameraPosition) {
-                camera.position.copy(cameraPosition);
-                camera.lookAt(targetPosition);
-            }
-
-            // Render loop
-            function animate() {
-                requestAnimationFrame(animate);
-                renderer.render(scene, camera);
-                controls.update();
-                // console.log(camera.position)
-            }
-            animate();
         </script>
+
+        <script type="module" src="./assets/js/render_model.js"></script>
+        <!-- <script type="module" src="./assets/js/render_annotations.js"></script> -->
 
         <!-- Bootstrap 5.3 JS Bundle (opcional, para funcionalidades como dropdowns, popovers, etc.) -->
         <script src="./assets/libs/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
 
         <!-- Theme JS -->
-        <script src="./assets/js/color-modes.js"></script>
+        <script type="module" src="./assets/js/color-modes.js"></script>
         <script src="./assets/js/theme.min.js"></script>
         <script src="./assets/libs/scrollcue/scrollCue.min.js"></script>
     </body>
