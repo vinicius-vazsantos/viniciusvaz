@@ -20,10 +20,8 @@ import { scene, ambientLight } from './render_model.js'; // Importa a variável 
     // Função para atualizar a cor de fundo do ThreeJs.js com base no tema
     const updateColorThreeJs = (theme) => {
         const colorThreeJs = theme === "dark" ? 0x020617 : 0xe1e2e4;
-        const lightThreeJs = theme === "dark" ? 1 : 3;
         // Altera o background da cena no modo light
         scene.background = new THREE.Color(colorThreeJs);
-        ambientLight.intensity = lightThreeJs;
     };
 
     // Função para atualizar a cor do Vanta.js com base no tema

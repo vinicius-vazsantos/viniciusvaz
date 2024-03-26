@@ -26,12 +26,12 @@ camera.position.set(1, 0, 5);
 camera.layers.enableAll();
 
 // Luz Ambiente
-const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambientLight);
 
 // Luz Direcional
 const directionalLight = new THREE.DirectionalLight(0xffffff);
-directionalLight.position.set(1, 3, 3);
+directionalLight.position.set(1, 3, -3);
 scene.add(directionalLight);
 
 // Luz Spot
@@ -39,70 +39,184 @@ const spotLight = new THREE.SpotLight(0xffffff, 1);
 spotLight.position.set(-2, 2, -2);
 spotLight.target.position.set(0, 0, 0); // Defina o alvo da luz spot
 scene.add(spotLight);
-scene.add(spotLight.target);
-
 
 // Array de anotações
 const annotations = [
     {
-        position: new THREE.Vector3(0, 1, 1.2),
-        content: '1',
-        lookAt: new THREE.Vector3(-2, 2, 3),
-        value: 'Cilindrada:	 320,6 cc',
-        id: 'cilindrada',
-        icon: 'fas fa-chart-bar',
-        title: 'Motor',
-    },
-    {
-        position: new THREE.Vector3(1, 1, -2),
-        content: '2',
-        lookAt: new THREE.Vector3(3, 2, 1),
-        value: '3,02 kgfm @ 9.000 rpm',
-        id: 'torque',
-        icon: 'fa-solid fa-bolt',
-        title: 'Torque',
-    },
-    {
         position: new THREE.Vector3(-0.8, 0.8, 1.8),
+        lookAt: new THREE.Vector3(-2, 0, 4),
+        reference: new THREE.Vector3(0, 0, 0),
+        maxDistance: 5,
+        content: '1',
+        description: `
+        <p class="card-text mb-0"><strong>Faróis de LED.</strong></p>
+        <p class="card-text mb-0"><strong>Regulagem de altura.</strong></p>`,
+        title: 'Farol Dianteiro',
+        srcImage: 'assets/images/demo/frontlight.jpg',
+    },
+    {
+        position: new THREE.Vector3(0, 1, 1.2),
+        lookAt: new THREE.Vector3(0, 0, 5),
+        reference: new THREE.Vector3(0, 0, 0),
+        maxDistance: 5,
+        content: '2',
+        description: `<p class="card-text mb-0"><strong>Cilindros:</strong> 6 em linha.</p>
+        <p class="card-text mb-0"><strong>Aspiração:</strong> Turbocompressor.</p>
+        <p class="card-text mb-0"><strong>Peso/potência:</strong> 3,65 kg/cv.</p>
+        <p class="card-text mb-0"><strong>Potência máxima:</strong> 431cv a 5600 rpm.</p>
+        <p class="card-text mb-0"><strong>Peso/torque:</strong> 28,0 kg/kgfm.</p>
+        <p class="card-text mb-0"><strong>Torque máximo:</strong> 56,1 kgfm a 1800 rpm.</p>
+        <p class="card-text mb-0"><strong>Rotação máxima:</strong> 7500 rpm.</p>`,
+        title: 'Motor',
+        srcImage: 'assets/images/demo/motor.jpg',
+    },
+    {
+        position: new THREE.Vector3(0, 0.2, 1),
+        lookAt: new THREE.Vector3(0, -5, 6),
+        reference: new THREE.Vector3(0, 0, 0),
+        maxDistance: 10,
         content: '3',
-        lookAt: new THREE.Vector3(1.5, 3, -2),
-        value: '42,01 cv @ 10.750 rpm',
-        id: 'potencia',
-        icon: 'fa-solid fa-bolt',
-        title: 'Potência',
+        description: `
+        <p class="card-text mb-0"><strong>Tração:</strong> Traseira.</p>
+        <p class="card-text mb-0"><strong>Câmbio:</strong> Automatizado de 7 marchas.</p>
+        <p class="card-text mb-0"><strong>Acoplamento:</strong> Embreagem dupla a seco.</p>`,
+        title: 'Transmissão',
+        srcImage: 'assets/images/demo/transmissao.webp',
+    },
+    {
+        position: new THREE.Vector3(0.9, 0.7, 1.1),
+        lookAt: new THREE.Vector3(2.8, -0.3, 1.6),
+        reference: new THREE.Vector3(1, -0.3, 1.3),
+        maxDistance: 5,
+        content: '4',
+        description: `
+        <p class="card-text mb-0"><strong>Tipo:</strong> ABS.</p>
+        <p class="card-text mb-0"><strong>Dianteiros:</strong> Disco ventilado.</p>
+        <p class="card-text mb-0"><strong>Traseiros:</strong> Disco ventilado.</p>
+        <p class="card-text mb-0"><strong>Pneus:</strong> 255/35 R19.</p>
+        <p class="card-text mb-0"><strong>Frenagem automática de emergência.</strong></p>
+        <p class="card-text mb-0"><strong>Monitoramento de pressão dos pneus.</strong></p>`,
+        title: 'Freios & Pneus',
+        srcImage: 'assets/images/demo/roda.png',
+    },
+    {
+        position: new THREE.Vector3(0.3, 1, 0),
+        lookAt: new THREE.Vector3(0.4, 0.3, -0.6),
+        reference: new THREE.Vector3(0.3, 0.2, 0),
+        maxDistance: 0.6,
+        content: '5',
+        description: `
+        <p class="card-text mb-0"><strong>Velocidade máxima:</strong> 250 km/h.</p>
+        <p class="card-text mb-0"><strong>Aceleração 0-100 km/h:</strong> 4,1 s.</p>
+        <p class="card-text mb-0"><strong>Consumo Urbano:</strong> 7,4 km/l.</p>
+        <p class="card-text mb-0"><strong>Consumo Rodoviário:</strong> 9,2 km/l.</p>
+        <p class="card-text mb-0"><strong>Autonomia Máxima:</strong> 552 km.</p>`,
+        title: 'Consumo & Desempenho',
+        srcImage: 'assets/images/demo/painel.jpg',
+    },
+    {
+        position: new THREE.Vector3(-0.8, 1, -2.2),
+        lookAt: new THREE.Vector3(-1, 0.3, -5),
+        reference: new THREE.Vector3(0, 0, 0),
+        maxDistance: 8,
+        content: '6',
+        description: `
+        <p class="card-text mb-0"><strong>Sensores de estacionamento.</strong></p>
+        <p class="card-text mb-0"><strong>Câmera traseira para manobras.</strong></p>`,
+        title: 'Traseira',
+        srcImage: 'assets/images/demo/backlight.webp',
     },
 ];
 
 // Função para adicionar os labels ao modelo carregado
 function addLabelsToModel(model) {
-    annotations.forEach((annotation) => {
-        const button = document.createElement('button');
+    let currentAnnotation = null;
+
+    annotations.forEach((annotation, index) => {
+        const button = document.createElement('div');
         button.textContent = annotation.content;
         button.style.width = '1.5rem';
         button.style.height = '1.5rem';
-        button.classList.add('annotation-btn');
+        button.classList.add('annotation');
 
+        // Adiciona o CSS2DObject como filho do modelo
         const css2DObject = new CSS2DObject(button);
         css2DObject.position.copy(annotation.position);
-        
-        // Adiciona o CSS2DObject como filho do modelo
         model.add(css2DObject);
 
+        // Cria o card como uma string HTML
+        const cardHTML = `
+        <div class="card border-primary" style="width: 14rem;">
+            <div class="card-img-top">
+                <img src="${annotation.srcImage}" class="w-100" alt="Imagem Veiculo">
+            </div>
+            
+            <div class="card-body">
+                <h5 class="card-title">${annotation.title}</h5>
+                ${annotation.description}
+            </div>
+        </div>`;
+
+        // Cria o card com título, valor e imagem
+        const cardElement = document.createElement('div');
+        cardElement.innerHTML = cardHTML;
+        cardElement.classList.add('annotation-card');
+        cardElement.hidden = true; // Card começa oculto
+
+        // Adiciona o CSS2DObject como filho do modelo
+        const cardCss2DObject = new CSS2DObject(cardElement);
+        cardCss2DObject.position.copy(annotation.position);
+        model.add(cardCss2DObject);
+        cardCss2DObject.center.set(0, 0);
+        cardCss2DObject.layers.set(index);
+
+
         button.addEventListener('click', () => {
+            // Para a rotação e redefine a posição inicial do modelo
+            rotating = false;
+            controls.maxDistance = annotation.maxDistance; // delimita o controle
+            // camera.position.set(0, -0.8, 0); // Move o modelo 1 unidade para baixo
+
+            // Oculta asanotações
+            hideAnnotations()
+
+            // Exibe o card correspondente ao botão clicado
+            setTimeout(() => {
+                cardElement.hidden = false;
+                cardElement.classList.add('fade-in');
+            }, 1000);
+
             moveToAnnotation(annotation);
         });
     });
 }
 
+// Adiciona o event listener ao documento para detectar cliques fora do card
+document.addEventListener('click', hideAnnotations);
+
+// Função para ocultar todas as anotações
+function hideAnnotations() {
+    document.querySelectorAll('.annotation-card').forEach((element) => {
+        element.hidden = true;
+    });
+}
+
 // Função para mover a câmera para a anotação correspondente
 function moveToAnnotation(annotation) {
+
     new TWEEN.Tween(camera.position)
-        .to(annotation.position, 1000)
+        .to(annotation.lookAt, 1000)
+        .onUpdate(() => {
+            controls.update();
+        })
         .easing(TWEEN.Easing.Quadratic.Out)
         .start();
 
-    new TWEEN.Tween(camera.lookAt)
-        .to(annotation.lookAt, 1000)
+    new TWEEN.Tween(controls.target)
+        .to(annotation.reference, 1000)
+        .onUpdate(() => {
+            controls.update();
+        })
         .easing(TWEEN.Easing.Quadratic.Out)
         .start();
 }
@@ -118,17 +232,18 @@ loader.load('./assets/models/bmw_m4_f82.glb', (gltf) => {
     addLabelsToModel(model);
 
     // Inicia a rotação do modelo
-    function rotateModel() {
-        if (rotating) {
-            model.rotation.y += 0.005 * rotateDirection; // Ajusta a velocidade de rotação
-        }
-        requestAnimationFrame(rotateModel);
-    }
-    rotateModel();
+    // function rotateModel() {
+    //     if (rotating) {
+    //         model.rotation.y += 0.005 * rotateDirection; // Ajusta a velocidade de rotação
+    //     }
+    //     requestAnimationFrame(rotateModel);
+    // }
+    // rotateModel()
 
     // Evento para pausar rotação do modelo
     const pauseRotate = document.getElementById('pauseRotate');
     pauseRotate.addEventListener('click', () => {
+
         // Verifica se o ícone está pausado ou não
         if (rotating) {
             pauseRotate.innerHTML = '<i class="bi bi-play-circle fs-4"></i>'; // Altera para o novo ícone
@@ -163,11 +278,10 @@ container.appendChild(css2DRenderer.domElement);
 const controls = new OrbitControls(camera, css2DRenderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
-controls.screenSpacePanning = false;
+controls.rotateSpeed = 0.5; // Velocidade de rotação do controle
 controls.minDistance = -10;
 controls.maxDistance = 15;
 controls.target.set( 0, 0, 0 );
-
 
 // Ao clicar no elemento câmera a posição atual do modelo é salvo como imagem
 const downloadBtn = document.getElementById('downloadImage');
@@ -196,10 +310,28 @@ downloadBtn.addEventListener('click', () => {
     renderer.dispose();
 });
 
+// Posição inicial da câmera em relação ao modelo
+let angle = 0;
 
 // Render loop
 function animate() {
     requestAnimationFrame(animate);
+
+    // Atualiza a posição da câmera para criar a rotação em torno do modelo
+    const radius = 5; // Distância da câmera ao modelo
+    const cameraX = Math.cos(angle) * radius;
+    const cameraZ = Math.sin(angle) * radius;
+    controls.enabled = !rotating;
+
+    if (rotating) {
+        
+        camera.position.set(cameraX, 0, cameraZ); // Ajuste a altura da câmera conforme necessário
+        camera.lookAt(new THREE.Vector3(0, 0, 0)); // Garante que a câmera sempre aponte para o modelo
+
+        angle += 0.005; // Atualiza o ângulo para a próxima frame
+    } 
+
+
     TWEEN.update();
     controls.update();
     renderer.render(scene, camera);

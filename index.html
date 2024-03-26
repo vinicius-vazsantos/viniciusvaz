@@ -49,18 +49,38 @@
             border-radius: 15px !important;
             z-index: 0;
           }
-          .annotation-btn {
+          .annotation {
             position: absolute;
             /* display: block; */
             background-color: #475569;
-            border: none;
+            border: 2px solid #cacaca;
             border-radius: 50%;
             color: white;
             user-select: none;
+            text-align: center;
             font-size: 0.8rem;
             transform: translate(-50%, -50%);
             cursor: pointer;
             z-index: 1;
+          }
+          .annotation-card {
+            user-select: none;
+            margin-top: -13.5em !important;
+            margin-left: 1rem !important;
+            font-size: 0.6rem !important;
+          }
+
+          .annotation-card .card-img-top {
+            max-height: 8rem !important;
+            width: 100% !important;
+          }
+
+          .annotation-card img {
+            width: 100% !important;
+            height: 100% !important;
+            border-top-left-radius: var(--bs-card-border-radius);
+            border-top-right-radius: var(--bs-card-border-radius);
+            object-fit: cover;
           }
         </style>
 
