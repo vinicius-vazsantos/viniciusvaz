@@ -19,7 +19,8 @@
         <!-- Vanta e ThreeJS necessário -->
         <script src="./assets/libs/threejs/three.min.js"></script>
         <script src="./assets/libs/vanta/vanta.waves.min.js"></script>
-        
+        <script src="./assets/libs/EmailJS/email.min.js"></script>
+        <script src="./assets/libs/Jquery/jquery.min.js"></script>
     </head>
     <body class="position-relative" data-bs-theme="dark">
         <!-- Início Navbar -->
@@ -582,7 +583,6 @@
             </section>
             <!--Fim demo-->
         
-
             <!--Início Contato-->
             <section class="pt-lg-9 pt-10" id="contato">
                 <div class="container">
@@ -595,37 +595,40 @@
                                             <h3 class="mb-4">Interessado em trabalhar juntos?
                                             Vamos conversar!</h3>
 
-                                            <form class="needs-validation" action="https://formsubmit.co/vinicius-vazsantos@hotmail.com.br" method="POST" novalidate>
+                                            <form id="contact-form" class="needs-validation" novalidate>
                                                 <div class="mb-3">
-                                                    <label for="YourNameInput"
+                                                    <label for="name"
                                                         class="form-label">Nome</label>
                                                     <input type="text"
                                                         class="form-control"
-                                                        id="YourNameInput"
+                                                        id="name"
+                                                        name="name"
                                                         placeholder="Nome"
-                                                        required="" />
+                                                        required/>
                                                     <div class="invalid-feedback">Por favor digite seu nome.</div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="yourEmailInput"
+                                                    <label for="email"
                                                         class="form-label">Email</label>
                                                     <input type="email"
                                                         class="form-control"
-                                                        id="yourEmailInput"
+                                                        id="email"
+                                                        name="email"
                                                         placeholder="Email"
-                                                        required="" />
+                                                        required/>
                                                     <div class="invalid-feedback">Por favor digite seu email.</div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="messageTextarea"
+                                                    <label for="message"
                                                         class="form-label">Motivo do contato</label>
                                                     <textarea class="form-control"
-                                                        id="messageTextarea"
+                                                        id="message"
+                                                        name="message"
                                                         placeholder="Descreva o motivo do contato."
                                                         rows="4" required></textarea>
                                                     <div class="invalid-feedback">Por favor digite uma menssagem.</div>
                                                 </div>
-                                                <button class="btn btn-primary"
+                                                <button id="submitButton" class="btn btn-primary"
                                                     type="submit"><i class="bi bi-send pe-2"></i>Enviar</button>
                                             </form>
                                         </div>
@@ -729,6 +732,23 @@
             <!--Fim Contato-->
         </main>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="modalContact" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content shadow-lg border">
+                    <div class="modal-body text-center">
+                        <img id="image-modal" class="card-img-top w-50" src="./assets/images/success.webp" alt="image enviar email"/>
+                        <div class="m-4">
+                            <h2 class="fw-semibold text-primary" id="title-send-email">Sucesso!</h2>
+                            <p class="text-muted lead text-light-emphasis" id="text-send-email">Email enviado com sucesso,<br> em breve entrarei em contato!</p>
+                            <button id="botao-voltar" type="button" data-bs-dismiss="modal" class="btn btn-primary fw-semibold px-4 rounded-pill">Voltar</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
          <!-- Footer -->
          <footer hidden>
             <div class="container mt-7 pt-lg-7 pb-4">
@@ -829,6 +849,46 @@
 
                 // Chama a função para ocultar os elementos visíveis e exibir o progresso inicialmente
                 hideVisibleElements();
+            });
+        </script>
+
+        <script>
+            // Inicializa o Email.js
+            emailjs.init('tpwDx_ZYpOFXRv7GK');
+
+            // Captura o evento de envio do formulário
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+
+                // Pega os elementos do modal
+                let imageModal = document.getElementById('image-modal');
+                let titleModal = document.getElementById('title-send-email');
+                let textModal = document.getElementById('text-send-email');
+                let buttonModal = document.getElementById('botao-voltar');
+
+                // Envia e-mail usando Email.js
+                emailjs.sendForm('service_f0auw3i', 'template_1r3mq3t', this).then(function(response) {
+                    // console.log('Email enviado!', response.status, response.text);
+                    titleModal.innerHTML = 'Sucesso!';
+                    textModal.innerHTML = 'Email enviado com sucesso,<br> em breve entrarei em contato!';
+                    imageModal.src = './assets/images/success.webp';
+                    titleModal.classList.remove('text-danger');
+                    titleModal.classList.add('text-primary');
+                    buttonModal.classList.remove('btn-danger');
+                    buttonModal.classList.add('btn-primary');
+                }, function(error) {
+                    // console.error('Erro ao enviar email:', error);
+                    titleModal.innerHTML = 'Ops! algo deu errado.';
+                    textModal.innerHTML = 'Houve um erro ao enviar o email, por favor tente novamente.';
+                    imageModal.src = './assets/images/error.webp';
+                    titleModal.classList.add('text-danger');
+                    titleModal.classList.remove('text-primary');
+                    buttonModal.classList.add('btn-danger');
+                    buttonModal.classList.remove('btn-primary');
+                });
+                
+                // Exibe o modal 
+                $('#modalContact').modal('show')
             });
         </script>
 
