@@ -9,170 +9,108 @@
         <!-- Bootstrap 5.3 CSS -->
         <script async="" src="https://www.clarity.ms/s/0.7.24/clarity.js"></script>
         <script async="" src="https://www.clarity.ms/tag/kss8za9j58"></script>
-
         <link rel="stylesheet" href="./assets/css/bootstrap-icons-1.11.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="./assets/libs/scrollcue/scrollCue.css">
         <link rel="stylesheet" href="./assets/css/boxicons.min.css">
         <link rel="stylesheet" href="./assets/css/theme.min.css">
+        <link rel="stylesheet" href="./assets/css/custom_loader.css">
+        <link rel="stylesheet" href="./assets/css/custom_styles.css">
 
+        <!-- Vanta e ThreeJS necessário -->
         <script src="./assets/libs/threejs/three.min.js"></script>
         <script src="./assets/libs/vanta/vanta.waves.min.js"></script>
-
-        <style>
-          .position-fixed {
-            z-index: 1000;
-          }
-          body[data-bs-theme="dark"] .navbar {
-            background-color: rgba(2, 22, 42, 0.8) !important; /* Cor de fundo com transparência */
-            backdrop-filter: blur(10px); /* Efeito de vidro fosco */
-            transition: background-color 0.3s ease-in-out; /* Transição suave ao mudar a cor de fundo */
-          }
-
-          body[data-bs-theme="light"] .navbar {
-            background-color: rgba(255, 255, 255, 0.8) !important; /* Cor de fundo com transparência */
-            backdrop-filter: blur(10px); /* Efeito de vidro fosco */
-            transition: background-color 0.3s ease-in-out; /* Transição suave ao mudar a cor de fundo */
-          }
-
-          .custom-size-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-          }
-
-          #containerBMW {
-            position: relative;
-            width: 100%; /* Largura será definida dinamicamente */
-            height: 500px; /* Altura de exemplo */
-          }
-          #containerBMW canvas {
-            border-radius: 15px !important;
-            z-index: 0;
-          }
-          .annotation {
-            position: absolute;
-            /* display: block; */
-            background-color: #475569;
-            border: 2px solid #cacaca;
-            border-radius: 50%;
-            color: white;
-            user-select: none;
-            text-align: center;
-            font-size: 0.8rem;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-            z-index: 1;
-          }
-          .annotation-card {
-            user-select: none;
-            margin-top: -13.5em !important;
-            margin-left: 1rem !important;
-            font-size: 0.6rem !important;
-          }
-
-          .annotation-card .card-img-top {
-            max-height: 8rem !important;
-            width: 100% !important;
-          }
-
-          .annotation-card img {
-            width: 100% !important;
-            height: 100% !important;
-            border-top-left-radius: var(--bs-card-border-radius);
-            border-top-right-radius: var(--bs-card-border-radius);
-            object-fit: cover;
-          }
-        </style>
-
         
     </head>
     <body class="position-relative" data-bs-theme="dark">
         <!-- Início Navbar -->
-        <div class="position-fixed w-100 d-flex justify-content-center">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-dark rounded-pill border shadow-lg">
-                    <div class="d-flex justify-content-between w-100 px-1">
-                        <button class="btn btn-light border p-2 fs-6 rounded-pill lh-1 d-flex align-items-center" type="button">
-                            <i class="bi bi-code-slash pe-2"></i> Dev
-                        </button>
-
-                        <button class="navbar-toggler offcanvas-nav-btn" type="button">
-                            <i class="bi bi-list"></i>
-                        </button>
-                        <div class="offcanvas offcanvas-start offcanvas-nav border rounded-3" style="width: 20rem">
-                            <div class="offcanvas-header">
-                                <a href="#" class="text-inverse"><i class="bi bi-code-slash pe-2"></i> Dev</a>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
-                            <div class="offcanvas-body pt-0 align-items-center">
-                                <ul class="navbar-nav mx-auto align-items-lg-center">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="#">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#sobre">Sobre</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#skills" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Skills
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item mb-3 text-body" href="#skills">
-                                            <div class="d-flex align-items-center">
-                                                <i class="bi bi-filetype-py fs-4 text-primary"></i>
-                                                <div class="ms-3 lh-1">
-                                                    <h5 class="mb-1">Python & Django</h5>
-                                                    <p class="mb-0 fs-6">Desenvolvimento Web com python.</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item text-body" href="#skills">
-                                            <div class="d-flex align-items-center">
-                                                <i class="bi bi-filetype-php fs-4 text-primary"></i>
-                                                <div class="ms-3 lh-1">
-                                                    <h5 class="mb-1">PHP & Laravel</h5>
-                                                    <p class="mb-0 fs-6">Framework para desenvolvimento Web</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#experiencia">Experiência</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#demo" aria-disabled="true">Demo</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#contato" aria-disabled="true">Contato</a>
-                                </li>
-                            </ul>
-                            <form class="d-flex mt-3 mt-lg-0" role="search">
-                                <div class="dropdown">
-                                    <button class="btn btn-light btn-icon rounded-circle bg-primary bg-opacity-10 text-primary border-primary d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-                                        <i class="bi theme-icon-active"></i>
-                                        <i class="bi theme-icon bi-moon-stars-fill"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
-                                        <li>
-                                            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
-                                                <i class="bi theme-icon bi-sun-fill"></i>
-                                                <span class="ms-2">Light</span>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="true">
-                                                <i class="bi theme-icon bi-moon-stars-fill"></i>
-                                                <span class="ms-2">Dark</span>
-                                            </button>
-                                        </li>
-                                    </ul>
+        <div id="containerNavbar" hidden class="position-fixed w-100">
+            <div class="d-flex justify-content-center">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg navbar-dark rounded-pill border mt-3 shadow-lg">
+                        <div class="d-flex justify-content-between w-100 px-1">
+                            <button class="btn btn-light border p-2 fs-6 rounded-pill lh-1 d-flex align-items-center" type="button">
+                                <i class="bi bi-code-slash pe-2"></i> Dev
+                            </button>
+    
+                            <button class="navbar-toggler offcanvas-nav-btn border" type="button">
+                                <i class="bi bi-list"></i>
+                            </button>
+                            <div class="offcanvas offcanvas-start offcanvas-nav border rounded-3">
+                                <div class="offcanvas-header">
+                                    <a href="#" class="text-inverse"><i class="bi bi-code-slash pe-2"></i> Dev</a>
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 </div>
-                            </form>
+                                <div class="offcanvas-body pt-0 align-items-center">
+                                    <ul class="navbar-nav mx-auto align-items-lg-center">
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#sobre">Sobre</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#skills" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Skills
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item mb-3 text-body" href="#skills">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-filetype-py fs-4 text-primary"></i>
+                                                    <div class="ms-3 lh-1">
+                                                        <h5 class="mb-1">Python & Django</h5>
+                                                        <p class="mb-0 fs-6">Desenvolvimento Web com python.</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="dropdown-item text-body" href="#skills">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-filetype-php fs-4 text-primary"></i>
+                                                    <div class="ms-3 lh-1">
+                                                        <h5 class="mb-1">PHP & Laravel</h5>
+                                                        <p class="mb-0 fs-6">Framework para desenvolvimento Web</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#experiencia">Experiência</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#demo" aria-disabled="true">Demo</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#contato" aria-disabled="true">Contato</a>
+                                    </li>
+                                </ul>
+                                <form class="d-flex mt-3 mt-lg-0" role="search">
+                                    <div class="dropdown dropdown-center">
+                                        <button class="btn btn-light btn-icon rounded-circle bg-primary bg-opacity-10 text-primary border-primary d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                                            <i class="bi theme-icon-active"></i>
+                                            <i class="bi theme-icon bi-moon-stars-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu mt-2 shadow" aria-labelledby="bs-theme-text">
+                                            <li>
+                                                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
+                                                    <i class="bi theme-icon bi-sun-fill"></i>
+                                                    <span class="ms-2">Claro</span>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="true">
+                                                    <i class="bi theme-icon bi-moon-stars-fill"></i>
+                                                    <span class="ms-2">Escuro</span>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                </div>
             </div>
+            
         </div>
         <!-- Fim Navbar -->
 
@@ -180,16 +118,24 @@
             <!--Início Home-->
             
             <section id="home">
-                <div class="container py-lg-9 py-10 mt-3" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                <div class="container py-lg-9 py-10" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
                     <div class="row justify-content-start">
                         <div class="col-xl-8 col-lg-10 col-12" data-cues="zoomIn" data-group="page-title" data-delay="700" data-disabled="true">
                             <div class="text-start d-flex flex-column gap-5" data-cue="zoomIn" data-group="page-title" data-delay="700" data-show="true" style="animation-name: zoomIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 700ms; animation-direction: normal; animation-fill-mode: both;">
-                                <div class="d-flex flex-column justify-content-start gap-3 mx-lg-10 mt-10">
-                                <h1 class="mb-0 display-5">Olá eu sou <span class="text-primary">Vinicius</span></h1>
-                                <h1 class="mb-0 display-5">Full Stack Developer</h1>
-                                <p class="mb-0 lead text-light-emphasis">Sou um Web Developer e Analista de dados, projeto e desenvolvo templates, Scripts e soluções performáticas e ao mesmo tempo impressionem os usuários.</p>
+                                <div class="d-flex flex-column justify-content-start gap-3 mt-10">
+                                <h1 class="mb-0 display-5 custom_experience text-nowrap">Olá eu sou <span class="text-primary words">
+                                    <span class="word">Vinicius</span>
+                                    <span class="word">Frontend Developer</span>
+                                    <span class="word">Backend Developer</span>
+                                    <span class="word">FullStack Developer</span>
+                                    <span class="word">Analista BI</span>
+                                    <span class="word">Vinicius</span>
+                                </span>
+                                </h1>
+                                <!-- <h1 class="mb-0 display-5">Full Stack Developer</h1> -->
+                                <p class="mb-0 lead text-light-emphasis">Sou um Web Developer e Analista de dados, projeto e desenvolvo templates e Scripts com soluções performáticas e que também impressionem os usuários.</p>
                                 </div>
-                                <div class="d-flex flex-row gap-2 justify-content-start ms-lg-10">
+                                <div class="d-flex flex-row gap-2 justify-content-start">
                                 <a href="#contato" class="btn btn-primary">Contatar</a>
                                 <a href="#demo" class="btn btn-light">Mais</a>
                                 </div>
@@ -212,7 +158,7 @@
                                     <span class="text-primary">mim</span>
                                 </h2>
                                 <p class="mb-0">
-                                    Meu nome é Vinicius Vaz, brasileiro de 25 anos, iniciei na tecnologia com conhecimentos técnicos, 
+                                    Meu nome é Vinicius Vaz, brasileiro 25 anos, iniciei na tecnologia com conhecimentos técnicos, 
                                     passando pela engenharia e agora há 4 anos atuo na programação, buscando dominar linguagens e 
                                     implementar tecnologias performáticas e inovadoras. Possuo experiência em diversas áreas, no Frontend domino HTML, 
                                     CSS, Bootstrap, JavaScript e React. Ja no BackEnd crio views e Rest API's em Python, PHP e Vue. 
@@ -372,8 +318,8 @@
                         </div>
                     </div>
   
-                    <div class="marquee text-center" style="max-height: 100px">
-                        <div class="track!" style="max-height: 100px">
+                    <div class="text-center" data-cue="flipInX" style="animation-name: slideInLeft; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                        <div class="track">
                             <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
                                 <span>
                                     <img src="assets/images/resume/html5.png"
@@ -433,8 +379,8 @@
                         </div>
                     </div>
 
-                    <div class="marquee text-center" style="height: 100px">
-                        <div class="track-2!" style="height: 100px">
+                    <div class="text-center" data-cue="flipInX"  style="animation-name: slideInRight; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                        <div class="track-2">
                             <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
                                 <span>
                                     <img src="assets/images/resume/next-js.svg"
@@ -505,7 +451,6 @@
             </section>
             <!--Fim skills-->
 
-            
             <!--Início experiencia e linguagens-->
             <section id="experiencia" class="py-xl-9 py-10">
                 <div class="container">
@@ -606,13 +551,13 @@
                                 <div class="card card-lift h-100 d-flex">
                                     <div class="card-body">
                                         <div class="mb-6">
-                                            <h3 class="h4">Modelo 3D - Threejs & CropperJS</h3>
+                                            <h3 class="h4">Modelo 3D - Threejs</h3>
                                             <p class="mb-0 fs-6">Visualize e navegue pelo modelo 3D da Yamaha R3 descobrindo toda sua ficha técnica.</p>
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Threejs</span>
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">GLTF</span>
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">TweenJs</span>
+                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">CSS2DRenderer</span>
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">OrbitControls</span>
-                                            <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">CropperJS</span>
                                         </div>
                                         <div id="containerBMW" class="position-relative">
                                             <div class="d-grid gap-2 d-md-block position-absolute text-end w-100 pt-2 pe-2" style="z-index: 10;">
@@ -650,7 +595,7 @@
                                             <h3 class="mb-4">Interessado em trabalhar juntos?
                                             Vamos conversar!</h3>
 
-                                            <form class="needs-validation" novalidate>
+                                            <form class="needs-validation" action="https://formsubmit.co/vinicius-vazsantos@hotmail.com.br" method="POST" novalidate>
                                                 <div class="mb-3">
                                                     <label for="YourNameInput"
                                                         class="form-label">Nome</label>
@@ -785,7 +730,7 @@
         </main>
 
          <!-- Footer -->
-         <footer>
+         <footer hidden>
             <div class="container mt-7 pt-lg-7 pb-4">
                 <div class="row align-items-center">
                     <div class="col-md-12">
@@ -807,10 +752,85 @@
             </svg>
         </div>
 
-        <!-- Carrega as libs necessárias para renderizar o modelo -->
-        <!-- <script src="./assets/libs/threejs/jsm/loaders/GLTFLoader.js"></script> -->
-        <!-- <script src="./assets/libs/threejs/jsm/@tweenjs/tween.umd.js"></script> -->
-        <!-- <script src="./assets/libs/threejs/jsm/controls/OrbitControls.js"></script> -->
+        <!-- Loader-->
+        <div id="container_progress" class="vh-100">
+			<div class="d-flex justify-content-center align-items-center flex-column h-100 w-100 py-auto" style="z-index: 1;">
+                
+                <div class="hourglassBackground">
+                    <div aria-live="assertive" role="alert" class="loader"></div>
+                    <div class="hourglassContainer">
+                      <div class="hourglassCurves"></div>
+                      <div class="hourglassCapTop"></div>
+                      <div class="hourglassGlassTop"></div>
+                      <div class="hourglassSand"></div>
+                      <div class="hourglassSandStream"></div>
+                      <div class="hourglassCapBottom"></div>
+                      <div class="hourglassGlass"></div>
+                    </div>
+                  </div>
+				<h5>Carregando Portifólio</h5>
+				<div class="progress w-25" style="height: 8px !important;">
+					<div id="progressBar" style="width: 25%;" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="25" aria-valuemax="100"></div>
+				</div>
+				<p id="percent-progressBar">25%</p>
+			</div>
+		</div>
+
+        <!-- Exibe o loading antes de renderizar a página -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let containerProgress = document.getElementById('container_progress');
+                let footer = document.getElementsByTagName('footer')[0];
+                let main = document.getElementsByTagName('main')[0];
+                let containerNavbar = document.getElementById('containerNavbar');
+                let progressBar = document.getElementById('progressBar');
+                let percentProgressBar = document.getElementById('percent-progressBar');
+                let progressSteps = [25, 50, 75, 100];
+                let currentStepIndex = 0;
+
+                // Função para exibir os elementos ocultos e ocultar o progresso
+                function showHiddenElements() {
+                    setTimeout(()=>{
+                        containerProgress.hidden = true;
+                        footer.hidden = false;
+                        main.style.display = 'block';
+                        containerNavbar.hidden = false;
+                    }, 500)
+                }
+
+                // Ouvinte de evento para quando todos os recursos forem carregados
+                window.addEventListener('load', function() {
+                    // Chama a função para iniciar o carregamento progressivo
+                    // Oculta o progresso e exibe os elementos ocultos após o carregamento completo da página
+                    setInterval(updateProgressBar, 200); // Atualiza a cada meio segundo (500 milissegundos)
+                });
+
+                // Atualiza a progress ao carregar a página
+                function updateProgressBar() {
+                    var currentStep = progressSteps[currentStepIndex];
+                    progressBar.style.width = currentStep + '%';
+                    percentProgressBar.textContent = currentStep + '%';
+
+                    if (currentStep === 100) {
+                        // Todos os recursos foram carregados
+                        showHiddenElements();
+                    } else {
+                        currentStepIndex++;
+                    }
+                }
+
+                // Função para ocultar os elementos visíveis e exibir o progresso
+                function hideVisibleElements() {
+                    containerProgress.hidden = false;
+                    footer.hidden = true;
+                    main.style.display = 'none';
+                    containerNavbar.hidden = true;
+                }
+
+                // Chama a função para ocultar os elementos visíveis e exibir o progresso inicialmente
+                hideVisibleElements();
+            });
+        </script>
 
         <script type="importmap">
             {

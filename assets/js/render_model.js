@@ -26,19 +26,20 @@ camera.position.set(1, 0, 5);
 camera.layers.enableAll();
 
 // Luz Ambiente
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
 scene.add(ambientLight);
 
-// Luz Direcional
-const directionalLight = new THREE.DirectionalLight(0xffffff);
-directionalLight.position.set(1, 3, -3);
-scene.add(directionalLight);
-
 // Luz Spot
-const spotLight = new THREE.SpotLight(0xffffff, 1);
-spotLight.position.set(-2, 2, -2);
-spotLight.target.position.set(0, 0, 0); // Defina o alvo da luz spot
+const spotLight = new THREE.SpotLight(0xffffff);
+spotLight.position.set(0, 5, 0);
+spotLight.intensity = 300;
 scene.add(spotLight);
+
+// Luz Spot da camera
+const spotLightCamera = new THREE.SpotLight(0xffffff);
+spotLightCamera.position.set(0, 0, 0);
+spotLightCamera.intensity = 2;
+scene.add(spotLightCamera);
 
 // Array de anotações
 const annotations = [
@@ -130,8 +131,6 @@ const annotations = [
 
 // Função para adicionar os labels ao modelo carregado
 function addLabelsToModel(model) {
-    let currentAnnotation = null;
-
     annotations.forEach((annotation, index) => {
         const button = document.createElement('div');
         button.textContent = annotation.content;
@@ -231,15 +230,6 @@ loader.load('./assets/models/bmw_m4_f82.glb', (gltf) => {
     // Adicionar os labels ao modelo carregado
     addLabelsToModel(model);
 
-    // Inicia a rotação do modelo
-    // function rotateModel() {
-    //     if (rotating) {
-    //         model.rotation.y += 0.005 * rotateDirection; // Ajusta a velocidade de rotação
-    //     }
-    //     requestAnimationFrame(rotateModel);
-    // }
-    // rotateModel()
-
     // Evento para pausar rotação do modelo
     const pauseRotate = document.getElementById('pauseRotate');
     pauseRotate.addEventListener('click', () => {
@@ -331,6 +321,9 @@ function animate() {
         angle += 0.005; // Atualiza o ângulo para a próxima frame
     } 
 
+    // Atualizando a posição da luz spot para acompanhar a câmera
+    spotLightCamera.position.copy(camera.position);
+
 
     TWEEN.update();
     controls.update();
@@ -339,4 +332,4 @@ function animate() {
 }
 animate();
 
-export { scene, ambientLight };
+export { scene };

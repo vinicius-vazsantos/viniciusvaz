@@ -1,0 +1,128 @@
+.position-fixed {
+    z-index: 1000;
+}
+  
+body {
+    overflow-x: hidden;
+}
+
+body[data-bs-theme="dark"] .navbar {
+    background-color: rgba(2, 22, 42, 0.8) !important; /* Cor de fundo com transparência */
+    backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+    transition: background-color 0.3s ease-in-out; /* Transição suave ao mudar a cor de fundo */
+}
+
+body[data-bs-theme="light"] .navbar {
+    background-color: rgba(255, 255, 255, 0.8) !important; /* Cor de fundo com transparência */
+    backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+    transition: background-color 0.3s ease-in-out; /* Transição suave ao mudar a cor de fundo */
+}
+
+.custom-size-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+#containerBMW {
+    position: relative;
+    width: 100%; /* Largura será definida dinamicamente */
+    height: 500px; /* Altura de exemplo */
+}
+
+#containerBMW canvas {
+    border-radius: 15px !important;
+    z-index: 0;
+}
+
+.annotation {
+    position: absolute;
+    /* display: block; */
+    background-color: #475569;
+    border: 2px solid #cacaca;
+    border-radius: 50%;
+    color: white;
+    user-select: none;
+    text-align: center;
+    font-size: 0.8rem;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.annotation-card {
+    user-select: none;
+    margin-top: -13.5em !important;
+    margin-left: 1rem !important;
+    font-size: 0.6rem !important;
+}
+
+.annotation-card .card-img-top {
+    max-height: 8rem !important;
+    width: 100% !important;
+}
+
+.annotation-card img {
+    width: 100% !important;
+    height: 100% !important;
+    border-top-left-radius: var(--bs-card-border-radius);
+    border-top-right-radius: var(--bs-card-border-radius);
+    object-fit: cover;
+}
+
+.custom_experience {
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 65px;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.words {
+    overflow: hidden;
+}
+
+.word {
+    display: block;
+    height: 100%;
+    padding-left: 6px;
+    animation: cycle-words 6s infinite;
+}
+
+@keyframes cycle-words {
+    0% {
+        transform: translateY(0%);
+    }
+
+    20% {
+        transform: translateY(-100%);
+    }
+
+    40% {
+        transform: translateY(-200%);
+    }
+
+    60% {
+        transform: translateY(-300%);
+    }
+
+    80% {
+        transform: translateY(-400%);
+    }
+
+    100% {
+        transform: translateY(-500%);
+    }
+}
+
+
+.offcanvas-backdrop {
+    background-color: transparent !important;
+} 
+
+.offcanvas {
+    width: 20rem !important;
+    height: 90vh !important;
+}

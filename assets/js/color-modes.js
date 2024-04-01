@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { scene, ambientLight } from './render_model.js'; // Importa a variável scene
+import { scene } from './render_model.js'; // Importa a variável scene
 
 (() => {
     "use strict";
@@ -19,7 +19,8 @@ import { scene, ambientLight } from './render_model.js'; // Importa a variável 
 
     // Função para atualizar a cor de fundo do ThreeJs.js com base no tema
     const updateColorThreeJs = (theme) => {
-        const colorThreeJs = theme === "dark" ? 0x020617 : 0xe1e2e4;
+        // const colorThreeJs = theme === "dark" ? 0x020617 : 0xe1e2e4;
+        const colorThreeJs = theme === "dark" ? 0xe1e2e4 : 0xe1e2e4;
         // Altera o background da cena no modo light
         scene.background = new THREE.Color(colorThreeJs);
     };
@@ -33,8 +34,8 @@ import { scene, ambientLight } from './render_model.js'; // Importa a variável 
                 mouseControls: true,
                 touchControls: true,
                 gyroControls: false,
-                minHeight: 200.00,
-                minWidth: 200.00,
+                minHeight: 456,
+                minWidth: window.innerWidth,
                 scale: 1.00,
                 scaleMobile: 1.00,
                 color: vantaColor
