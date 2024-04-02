@@ -318,7 +318,7 @@ function animate() {
         camera.position.set(cameraX, 0, cameraZ); // Ajuste a altura da câmera conforme necessário
         camera.lookAt(new THREE.Vector3(0, 0, 0)); // Garante que a câmera sempre aponte para o modelo
 
-        angle += 0.005; // Atualiza o ângulo para a próxima frame
+        angle += 0.005 * rotateDirection; // Atualiza o ângulo para a próxima frame
     } 
 
     // Atualizando a posição da luz spot para acompanhar a câmera
