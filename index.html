@@ -134,7 +134,7 @@
                                 </span>
                                 </h1>
                                 <!-- <h1 class="mb-0 display-5">Full Stack Developer</h1> -->
-                                <p class="mb-0 lead text-light-emphasis">Sou um Web Developer e Analista de dados, projeto e desenvolvo templates e Scripts com soluções performáticas e que também impressionem os usuários.</p>
+                                <p class="mb-0 lead text-light-emphasis">Sou um Web Developer e Analista de dados, projeto e desenvolvo templates e scripts com soluções performáticas e que também impressionem os usuários.</p>
                                 </div>
                                 <div class="d-flex flex-row gap-2 justify-content-start">
                                 <a href="#contato" class="btn btn-primary">Contatar</a>
@@ -162,7 +162,7 @@
                                     Meu nome é Vinicius Vaz, brasileiro 25 anos, iniciei na tecnologia com conhecimentos técnicos, 
                                     passando pela engenharia e agora há 4 anos atuo na programação, buscando dominar linguagens e 
                                     implementar tecnologias performáticas e inovadoras. Possuo experiência em diversas áreas, no Frontend domino HTML, 
-                                    CSS, Bootstrap, JavaScript e React. Ja no BackEnd crio views e Rest API's em Python, PHP e Vue. 
+                                    CSS, Bootstrap e JavaScript. Ja no BackEnd crio views e Rest API's em Python, PHP e Vue. Enquanto que no Mobile desenvolvo aplicações em Flutter e Dart.
                                     Na análise de dados tenho experiencia e conhecimentos sólidos em Power BI, SQL Server, MySQL e versionamento de código com Git.
                                     Atualmente, bacharel em Engenharia Elétrica e em busca de aprimoramento contínuo.
                                 </p>
@@ -409,6 +409,13 @@
                                     alt="logo" class="icon-xs"/>
                                 </span>
                                 <span class="ms-1 d-none d-lg-inline-flex">Laravel</span>
+                            </a>
+                            <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
+                                <span>
+                                    <img src="assets/images/resume/flutter.png"
+                                    alt="logo" class="icon-xs"/>
+                                </span>
+                                <span class="ms-1 d-none d-lg-inline-flex">Flutter</span>
                             </a>
                             <a href="#!" class="btn btn-white rounded-pill me-1 mb-3 btn-logo shadow-sm mx-2 mb-4 btn-lift">
                                 <span>
@@ -864,41 +871,92 @@
             document.getElementById('contact-form').addEventListener('submit', function(event) {
                 event.preventDefault(); // Impede o envio padrão do formulário
 
-                // Pega os elementos do modal
+                // Valida o preenchimento do formulário de contato
+                if (validateInputs('contact-form')) {
+                    // Envia e-mail usando Email.js
+                    emailjs.sendForm('service_f0auw3i', 'template_1r3mq3t', this).then(function(response) {
+                        // console.log('Email enviado!', response.status, response.text);
+                        atualizarModal(
+                            { titulo: 'Sucesso!', 
+                            conteudo: 'Email enviado com sucesso,<br> em breve entrarei em contato!' },
+                            './assets/images/success.webp',
+                            { titulo: 'text-primary', botao: 'btn-primary' }
+                        );
+                    }, function(error) {
+                        // console.error('Erro ao enviar email:', error);
+                        atualizarModal(
+                            { titulo: 'Ops! algo deu errado.', 
+                            conteudo: 'Houve um erro ao enviar o email, por favor tente novamente.' },
+                            './assets/images/error.webp',
+                            { titulo: 'text-danger', botao: 'btn-danger' }
+                        );
+                    });
+                }
+            });
+
+            // Recarregar a página ao fechar o modal de sucesso
+            $('#modalContact').on('hidden.bs.modal', function () {
+                if ($('#title-send-email').hasClass('text-primary')) {
+                    location.reload(true);
+                }
+            });
+
+            // Função para atualizar as informações e imagens do modal de notificação
+            function atualizarModal(texto, imagem, classes) {
                 let imageModal = document.getElementById('image-modal');
                 let titleModal = document.getElementById('title-send-email');
                 let textModal = document.getElementById('text-send-email');
                 let buttonModal = document.getElementById('botao-voltar');
 
-                // Envia e-mail usando Email.js
-                emailjs.sendForm('service_f0auw3i', 'template_1r3mq3t', this).then(function(response) {
-                    // console.log('Email enviado!', response.status, response.text);
-                    titleModal.innerHTML = 'Sucesso!';
-                    textModal.innerHTML = 'Email enviado com sucesso,<br> em breve entrarei em contato!';
-                    imageModal.src = './assets/images/success.webp';
-                    titleModal.classList.remove('text-danger');
-                    titleModal.classList.add('text-primary');
-                    buttonModal.classList.remove('btn-danger');
-                    buttonModal.classList.add('btn-primary');
-                }, function(error) {
-                    // console.error('Erro ao enviar email:', error);
-                    titleModal.innerHTML = 'Ops! algo deu errado.';
-                    textModal.innerHTML = 'Houve um erro ao enviar o email, por favor tente novamente.';
-                    imageModal.src = './assets/images/error.webp';
-                    titleModal.classList.add('text-danger');
-                    titleModal.classList.remove('text-primary');
-                    buttonModal.classList.add('btn-danger');
-                    buttonModal.classList.remove('btn-primary');
-                });
+                titleModal.innerHTML = texto.titulo;
+                textModal.innerHTML = texto.conteudo;
+                imageModal.src = imagem;
                 
-                // Exibe o modal 
-                $('#modalContact').modal('show');
-            });
+                // Remove classes anteriores
+                titleModal.classList.remove('text-danger');
+                titleModal.classList.remove('text-primary');
+                buttonModal.classList.remove('btn-danger');
+                buttonModal.classList.remove('btn-primary');
 
-            // Recarregar a página ao fechar o modal
-            $('#modalContact').on('hidden.bs.modal', function () {
-                location.reload(true);
-            });
+                // Adiciona novas classes
+                titleModal.classList.add(classes.titulo);
+                buttonModal.classList.add(classes.botao);
+
+                // Exibe o modal
+                $('#modalContact').modal('show');
+            }
+
+            // Função para validar os inputs do formulário de contato
+            function validateInputs(id_element) {
+                // Obtém os campos do formulário atual
+                const form = document.getElementById(id_element);
+                const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+                // Valida cada campo
+                let valid = true;
+                inputs.forEach(input => {
+                    if (!input.checkValidity() || (input.value === '0' && input.required)) {
+                        input.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                });
+
+                // Verifica a validação do formulário
+                if (!valid) {
+                    // Exibe o modal de erro caso algum campo esteja vazio
+                    atualizarModal(
+                            { titulo: 'Ops! algo deu errado.', 
+                            conteudo: 'Por favor preencha todos os campos para continuar.' },
+                            './assets/images/error.webp',
+                            { titulo: 'text-danger', botao: 'btn-danger' }
+                        );
+                }
+
+                // Retorna a validação do form
+                return valid;
+            }
         </script>
 
         <script type="importmap">
