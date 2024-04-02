@@ -90,7 +90,7 @@
                                             <i class="bi theme-icon-active"></i>
                                             <i class="bi theme-icon bi-moon-stars-fill"></i>
                                         </button>
-                                        <ul class="dropdown-menu mt-2 shadow" aria-labelledby="bs-theme-text">
+                                        <ul class="dropdown-menu mt-2 border shadow" aria-labelledby="bs-theme-text">
                                             <li>
                                                 <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
                                                     <i class="bi theme-icon bi-sun-fill"></i>
@@ -469,7 +469,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive-xl pb-5">
+                    <div class="table-responsive-xl py-2">
                         <div class="row flex-nowrap">
                             <div class="col-lg-4 col-md-6">
                                 <a href="#!">
@@ -743,7 +743,6 @@
                             <p class="text-muted lead text-light-emphasis" id="text-send-email">Email enviado com sucesso,<br> em breve entrarei em contato!</p>
                             <button id="botao-voltar" type="button" data-bs-dismiss="modal" class="btn btn-primary fw-semibold px-4 rounded-pill">Voltar</button>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -853,6 +852,11 @@
         </script>
 
         <script>
+            // Fecha o offcanvas ao clicar em um link dentro
+            $('.navbar').on('click', '.offcanvas a:not(.dropdown-toggle)', function(){
+                $('.offcanvas').offcanvas('hide')
+            });
+
             // Inicializa o Email.js
             emailjs.init('tpwDx_ZYpOFXRv7GK');
 
@@ -888,7 +892,12 @@
                 });
                 
                 // Exibe o modal 
-                $('#modalContact').modal('show')
+                $('#modalContact').modal('show');
+            });
+
+            // Recarregar a página ao fechar o modal
+            $('#modalContact').on('hidden.bs.modal', function () {
+                location.reload(true);
             });
         </script>
 
