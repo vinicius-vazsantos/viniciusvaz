@@ -150,5 +150,7 @@ body[data-bs-theme="light"] .navbar {
 
 .offcanvas {
     width: 20rem !important;
-    height: 90vh !important;
+    height: 33rem;
+    max-height: 33rem !important;
 }
+
