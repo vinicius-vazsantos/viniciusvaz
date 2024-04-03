@@ -82,8 +82,8 @@ body[data-bs-theme="light"] .navbar {
 
 .img_lang {
     object-fit: cover;
-    width: 30px !important;
-    height: 30px !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
 }
 
 .navbar .navbar-nav .nav-item .nav-link {
