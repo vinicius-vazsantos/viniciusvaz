@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { scene } from './render_model.js'; // Importa a variável scene
+import { scene } from './render-model.js'; // Importa a variável scene
 
 (() => {
     "use strict";
@@ -87,6 +87,7 @@ import { scene } from './render_model.js'; // Importa a variável scene
             button.addEventListener("click", () => {
                 const newTheme = button.getAttribute("data-bs-theme-value");
                 setTheme(newTheme);
+                $('.offcanvas').offcanvas('hide')
             });
         });
     });

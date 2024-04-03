@@ -29,7 +29,7 @@
                 <div class="container">
                     <nav class="navbar navbar-expand-lg navbar-dark rounded-pill border mt-3 shadow-lg">
                         <div class="d-flex justify-content-between w-100 px-1">
-                            <button class="btn btn-light border p-2 fs-6 rounded-pill lh-1 d-flex align-items-center" type="button">
+                            <button onclick="window.location.reload()" class="btn btn-light border p-2 fs-6 rounded-pill lh-1 d-flex align-items-center" type="button">
                                 <i class="bi bi-code-slash pe-2"></i> Dev
                             </button>
     
@@ -47,7 +47,7 @@
                                         <a class="nav-link" aria-current="page" href="#">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#sobre">Sobre</a>
+                                        <a class="nav-link" id="nav-link-about" href="#sobre">Sobre</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#skills" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,7 +59,7 @@
                                                     <i class="bi bi-filetype-py fs-4 text-primary"></i>
                                                     <div class="ms-3 lh-1">
                                                         <h5 class="mb-1">Python & Django</h5>
-                                                        <p class="mb-0 fs-6">Desenvolvimento Web com python.</p>
+                                                        <p class="mb-0 fs-6" id="dropdown-skill-1">Desenvolvimento Web com python.</p>
                                                     </div>
                                                 </div>
                                             </a>
@@ -68,23 +68,46 @@
                                                     <i class="bi bi-filetype-php fs-4 text-primary"></i>
                                                     <div class="ms-3 lh-1">
                                                         <h5 class="mb-1">PHP & Laravel</h5>
-                                                        <p class="mb-0 fs-6">Framework para desenvolvimento Web</p>
+                                                        <p class="mb-0 fs-6" id="dropdown-skill-2">Framework para desenvolvimento Web.</p>
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#experiencia">Experiência</a>
+                                        <a class="nav-link" id="nav-link-experience" href="#experiencia">Experiência</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#demo" aria-disabled="true">Demo</a>
+                                        <a class="nav-link" id="nav-link-demo" href="#demo" aria-disabled="true">Demo</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#contato" aria-disabled="true">Contato</a>
+                                        <a class="nav-link" id="nav-link-contact" href="#contato" aria-disabled="true">Contato</a>
                                     </li>
                                 </ul>
                                 <form class="d-flex mt-3 mt-lg-0" role="search">
+                                    <div class="dropdown dropdown-center me-2">
+                                        <button class="btn btn-light btn-icon rounded-circle bg-dark bg-opacity-10 text-dark border d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Change language">
+                                            <i class="bi bi-translate"></i>
+                                        </button>
+                                        <ul class="dropdown-menu mt-2 border shadow" id="select-lang">
+                                            <li>
+                                                <button type="button" class="dropdown-item d-flex align-items-center lang-active">
+                                                    <img src="assets/images/flag_brasil.png"
+                                                        alt="Flag Brazil"
+                                                        class="img-fluid rounded-circle img_lang">
+                                                    <span class="ms-2" id="dropdown-lang-ptbr">Português (BR)</span>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="dropdown-item d-flex align-items-center">
+                                                    <img src="assets/images/flag_eua.png"
+                                                        alt="Flag EUA"
+                                                        class="img-fluid rounded-circle img_lang">
+                                                    <span class="ms-2" id="dropdown-lang-en">Inglês (EUA)</span>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <div class="dropdown dropdown-center">
                                         <button class="btn btn-light btn-icon rounded-circle bg-primary bg-opacity-10 text-primary border-primary d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
                                             <i class="bi theme-icon-active"></i>
@@ -94,13 +117,13 @@
                                             <li>
                                                 <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
                                                     <i class="bi theme-icon bi-sun-fill"></i>
-                                                    <span class="ms-2">Claro</span>
+                                                    <span class="ms-2" id="dropdown-theme-light">Claro</span>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark" aria-pressed="true">
                                                     <i class="bi theme-icon bi-moon-stars-fill"></i>
-                                                    <span class="ms-2">Escuro</span>
+                                                    <span class="ms-2" id="dropdown-theme-dark">Escuro</span>
                                                 </button>
                                             </li>
                                         </ul>
@@ -115,7 +138,7 @@
         </div>
         <!-- Fim Navbar -->
 
-        <main>
+        <main style="visibility: none;">
             <!--Início Home-->
             <section id="home">
                 <div class="container py-lg-9 py-10" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
@@ -123,7 +146,7 @@
                         <div class="col-xl-8 col-lg-10 col-12" data-cues="zoomIn" data-group="page-title" data-delay="700" data-disabled="true">
                             <div class="text-start d-flex flex-column gap-5" data-cue="zoomIn" data-group="page-title" data-delay="700" data-show="true" style="animation-name: zoomIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 700ms; animation-direction: normal; animation-fill-mode: both;">
                                 <div class="d-flex flex-column justify-content-start gap-3 mt-10">
-                                <h1 class="mb-0 display-5 custom_experience text-nowrap">Olá eu sou <span class="text-primary words">
+                                <h1 class="mb-0 display-5 custom_experience text-nowrap" id="title-presentation">Olá eu sou <span class="text-primary words">
                                     <span class="word">Vinicius</span>
                                     <span class="word">Frontend Developer</span>
                                     <span class="word">Backend Developer</span>
@@ -133,11 +156,11 @@
                                 </span>
                                 </h1>
                                 <!-- <h1 class="mb-0 display-5">Full Stack Developer</h1> -->
-                                <p class="mb-0 lead text-light-emphasis">Sou um Web Developer e Analista de dados, projeto e desenvolvo templates e scripts com soluções performáticas e que também impressionem os usuários.</p>
+                                <p class="mb-0 lead text-light-emphasis" id="text-presentation">Sou um Web Developer e Analista de dados, projeto e desenvolvo templates e scripts com soluções performáticas e que também impressionem os usuários.</p>
                                 </div>
                                 <div class="d-flex flex-row gap-2 justify-content-start">
-                                <a href="#contato" class="btn btn-primary">Contatar</a>
-                                <a href="#demo" class="btn btn-light">Mais</a>
+                                <a href="#contato" id="home-button-contact" class="btn btn-primary">Contatar</a>
+                                <a href="#demo" id="home-button-more" class="btn btn-light">Mais</a>
                                 </div>
                             </div>
                         </div>
@@ -153,11 +176,11 @@
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
                             <div class="text-center mb-xl-7 mb-5">
-                                <h2 class="mb-3">
+                                <h2 class="mb-3" id="title-about">
                                     Sobre
                                     <span class="text-primary">mim</span>
                                 </h2>
-                                <p class="mb-0">
+                                <p class="mb-0" id="text-about">
                                     Meu nome é Vinicius Vaz, brasileiro 25 anos, iniciei na tecnologia com conhecimentos técnicos, 
                                     passando pela engenharia e agora há 4 anos atuo na programação, buscando dominar linguagens e 
                                     implementar tecnologias performáticas e inovadoras. Possuo experiência em diversas áreas, no Frontend domino HTML, 
@@ -175,81 +198,67 @@
                                 aria-orientation="vertical">
                                 <a href="#"
                                     class="nav-link active d-flex text-start align-items-center align-items-lg-start p-xl-4 p-3"
-                                    id="v-pills-small-business-tab"
+                                    id="v-pills-frontend-tab"
                                     data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-small-business" role="tab"
-                                    aria-controls="v-pills-small-business"
+                                    data-bs-target="#v-pills-frontend" role="tab"
+                                    aria-controls="v-pills-frontend"
                                     aria-selected="true">
                                     <div class="d-flex">
                                         <div
                                             class="icon-md icon-shape rounded-circle bg-white shadow-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                width="18" height="18"
-                                                fill="currentColor"
-                                                class="bi bi-bank2 text-primary"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916l-7.5-5zM12.375 6v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1H.5z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16">
+                                                <path d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/>
                                             </svg>
                                         </div>
                                     </div>
                                     <div class="ms-4">
                                         <h4 class="mb-0">Frontend Developer</h4>
-                                        <p class="mb-0 mt-lg-3 d-none d-lg-block">
+                                        <p id="text-about-frontend" class="mb-0 mt-lg-3 d-none d-lg-block">
                                             Desenvolvimento de interfaces responsivas e modernas para web, com foco em experiências de usuário atrativas e funcionais, seguindo as melhores práticas de design e desenvolvimento frontend.
                                         </p>
                                     </div>
                                 </a>
                                 <a href="#"
                                     class="nav-link d-flex text-start align-items-center align-items-lg-start p-xl-4 p-3"
-                                    id="v-pills-profile-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-profile" role="tab"
-                                    aria-controls="v-pills-profile"
+                                    id="v-pills-backend-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-backend" role="tab"
+                                    aria-controls="v-pills-backend"
                                     aria-selected="false">
                                     <div class="d-flex">
                                         <div
                                             class="icon-md icon-shape rounded-circle bg-white shadow-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                width="18" height="18"
-                                                fill="currentColor"
-                                                class="bi bi-credit-card-2-front-fill text-primary"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-code" viewBox="0 0 16 16">
+                                                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+                                                <path d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708m-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708"/>
                                             </svg>
                                         </div>
                                     </div>
                                     <div class="ms-4">
                                         <h4 class="mb-0">BackEnd Developer</h4>
-                                        <p class="mb-0 mt-lg-3 d-none d-lg-block">
+                                        <p id="text-about-backend" class="mb-0 mt-lg-3 d-none d-lg-block">
                                             Integrações com bancos de dados e criação de serviços web robustos e escaláveis para garantir sistemas eficientes e seguros no backend, com alta performance e confiabilidade nas aplicações.
                                         </p>
                                     </div>
                                 </a>
                                 <a href="#"
                                     class="nav-link d-flex text-start p-xl-4 p-3 align-items-center align-items-lg-start"
-                                    id="v-pills-enterprises-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-enterprises" role="tab"
-                                    aria-controls="v-pills-enterprises"
+                                    id="v-pills-analyst-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-analyst" role="tab"
+                                    aria-controls="v-pills-analyst"
                                     aria-selected="false">
                                     <div class="d-flex">
                                         <div
                                             class="icon-md icon-shape rounded-circle bg-white shadow-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                width="18" height="18"
-                                                fill="currentColor"
-                                                class="bi bi-cash-stack text-primary"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                                                <path
-                                                    d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data" viewBox="0 0 16 16">
+                                                <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5z"/>
+                                                <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5z"/>
+                                                <path d="M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 0-1 1v3a1 1 0 1 0 2 0V9a1 1 0 0 0-1-1"/>
                                             </svg>
                                         </div>
                                     </div>
                                     <div class="ms-4">
-                                        <h4 class="mb-0">Analista de dados</h4>
-                                        <p class="mb-0 mt-lg-3 d-none d-lg-block">
+                                        <h4 class="mb-0" id="title-about-bi-analist">Analista de dados</h4>
+                                        <p id="text-about-bi-analist" class="mb-0 mt-lg-3 d-none d-lg-block">
                                             Análise de dados: manipulação, limpeza e análise para criação de dashboards e relatórios interativos, visando extrair insights valiosos e impulsionar o sucesso de projetos e organizações.
                                         </p>
                                     </div>
@@ -259,40 +268,39 @@
                         <div class="col-xl-6 offset-xl-1 col-md-6 col-12">
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active"
-                                    id="v-pills-small-business" role="tabpanel"
-                                    aria-labelledby="v-pills-small-business-tab"
+                                    id="v-pills-frontend" role="tabpanel"
+                                    aria-labelledby="v-pills-frontend-tab"
                                     tabindex="0">
                                     <div class="position-relative scene"
                                         data-relative-input="true">
                                         <figure><img
                                                 src="assets/images/ui_ux_design.jpg"
-                                                alt="finance"
+                                                alt="ui_ux"
                                                 class="img-fluid rounded-3"></figure>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-profile"
+                                <div class="tab-pane fade" id="v-pills-backend"
                                     role="tabpanel"
-                                    aria-labelledby="v-pills-profile-tab" tabindex="0">
+                                    aria-labelledby="v-pills-backend-tab" tabindex="0">
                                     <div class="position-relative scene"
                                         data-relative-input="true">
                                         <figure><img
                                                 src="assets/images/backend.png"
-                                                alt="finance"
+                                                alt="Backend"
                                                 class="img-fluid w-100 rounded-3"></figure>
                                     </div>
                                 </div>
   
-                                <div class="tab-pane fade" id="v-pills-enterprises"
+                                <div class="tab-pane fade" id="v-pills-analyst"
                                     role="tabpanel"
-                                    aria-labelledby="v-pills-enterprises-tab"
+                                    aria-labelledby="v-pills-analyst-tab"
                                     tabindex="0">
                                     <div class="position-relative scene"
                                         data-relative-input="true">
                                         <figure><img
                                                 src="assets/images/data-analitics.jpg"
-                                                alt="finance"
+                                                alt="Data Analitics"
                                                 class="img-fluid rounded-3" /></figure>
-  
                                     </div>
                                 </div>
                             </div>
@@ -309,7 +317,7 @@
                         <div class="col-lg-8 offset-lg-2 col-md-12">
                             <div class="text-center mb-5 mb-lg-8">
                                 <h2 class="mt-4">Skills</h2>
-                                <p class="mb-0 px-xl-9 text-light-emphasis">
+                                <p class="mb-0 px-xl-9 text-light-emphasis" id="text-skills">
                                     Possuo conhecimento em integrar e desenvolver soluções para
                                     <span class="text-primary">todas</span>
                                     as tecnologias abaixo, de acordo com seu modelo de negócio.
@@ -450,7 +458,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-center mt-lg-4">
-                                <a href="#contato" class="btn btn-dark">Conhecer</a>
+                                <a href="#contato" id="button-skills" class="btn btn-dark">Conhecer</a>
                             </div>
                         </div>
                     </div>
@@ -464,13 +472,13 @@
                     <div class="row">
                         <div class="col-xl-6 offset-xl-3 col-md-12">
                             <div class="text-center mb-lg-7 mb-5">
-                                <h2 class="mt-5 px-lg-10 px-6">
+                                <h2 class="mt-5 px-lg-10 px-6" id="title-experience">
                                     Algumas de minhas 
-                                    <span class="text-primary">experiencias.</span>
+                                    <span class="text-primary">experiencias</span>
                                 </h2>
-                                <p class="mb-0">
+                                <p class="mb-0" id="text-experience">
                                     Aqui estão alguns items que trabalho há mais de 
-                                    <span class="text-dark">4 anos</span>
+                                    <span class="text-dark">4 anos</span>.
                                 </p>
                             </div>
                         </div>
@@ -482,8 +490,8 @@
                                     <div class="card card-lift bg-light h-100 d-flex">
                                         <div class="card-body pb-0">
                                             <div class="mb-6">
-                                                <h3 class="h4">Power BI</h3>
-                                                <p class="mb-0 fs-6">Analista de dados(2019 -2024).</p>
+                                                <h3 class="h4" id="title-first-experience">Power BI</h3>
+                                                <p class="mb-0 fs-6" id="text-first-experience">Analista de dados(2019 -2024).</p>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">ETL</span>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">MySQL</span>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">SQLServer</span>
@@ -501,8 +509,8 @@
                                     <div class="card card-lift bg-light h-100 d-flex">
                                         <div class="card-body pb-0">
                                             <div class="mb-6">
-                                                <h3 class="h4">Desenvolvimento Web - Python</h3>
-                                                <p class="mb-0 fs-6">Analista de Desenvolvimento(2020 -2024).</p>
+                                                <h3 class="h4" id="title-second-experience">Desenvolvimento Web - Python</h3>
+                                                <p class="mb-0 fs-6" id="text-second-experience">Analista de Desenvolvimento(2020 -2024).</p>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Python 3.11</span>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Django</span>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Celery</span>
@@ -520,8 +528,8 @@
                                     <div class="card card-lift bg-light h-100 d-flex">
                                         <div class="card-body pb-0">
                                             <div class="mb-6">
-                                                <h3 class="h4">Desenvolvimento Web - PHP</h3>
-                                                <p class="mb-0 fs-6">Analista de Desenvolvimento(2020 -2024).</p>
+                                                <h3 class="h4" id="title-third-experience">Desenvolvimento Web - PHP</h3>
+                                                <p class="mb-0 fs-6" id="text-third-experience">Analista de Desenvolvimento(2020 -2024).</p>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">PHP 8</span>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Laravel</span>
                                                 <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">TOTVS</span>
@@ -545,7 +553,7 @@
                     <div class="row">
                         <div class="col-xl-6 offset-xl-3 col-md-12">
                             <div class="text-center mb-lg-7 mb-5">
-                                <h2 class="mt-5 px-lg-10 px-6">
+                                <h2 class="mt-5 px-lg-10 px-6" id="title-demo">
                                     Veja uma pequena 
                                     <span class="text-primary">demonstração</span>
                                 </h2>
@@ -558,8 +566,8 @@
                                 <div class="card card-lift h-100 d-flex">
                                     <div class="card-body">
                                         <div class="mb-6">
-                                            <h3 class="h4">Modelo 3D - Threejs</h3>
-                                            <p class="mb-0 fs-6">Visualize e navegue pelo modelo 3D da BMW M4 F82 e descubra tudo sobre sua configuração.</p>
+                                            <h3 class="h4" id="subtitle-demo">Modelo 3D - Threejs</h3>
+                                            <p class="mb-0 fs-6" id="text-demo">Visualize e navegue pelo modelo 3D da BMW M4 F82 e descubra tudo sobre sua configuração.</p>
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">Threejs</span>
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">GLTF</span>
                                             <span class="badge bg-light-subtle border border-light-subtle text-light-emphasis rounded-2">TweenJs</span>
@@ -598,12 +606,12 @@
                                 <div class="col-md-6">
                                     <div class="card bg-light">
                                         <div class="card-body p-5">
-                                            <h3 class="mb-4">Interessado em trabalhar juntos?
+                                            <h3 class="mb-4" id="title-contact">Interessado em trabalhar juntos?
                                             Vamos conversar!</h3>
 
                                             <form id="contact-form" class="needs-validation" novalidate>
                                                 <div class="mb-3">
-                                                    <label for="name"
+                                                    <label id="label-name" for="name"
                                                         class="form-label">Nome</label>
                                                     <input type="text"
                                                         class="form-control"
@@ -611,7 +619,7 @@
                                                         name="name"
                                                         placeholder="Nome"
                                                         required/>
-                                                    <div class="invalid-feedback">Por favor digite seu nome.</div>
+                                                    <div class="invalid-feedback" id="name-invalid">Por favor digite seu nome.</div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="email"
@@ -622,17 +630,17 @@
                                                         name="email"
                                                         placeholder="Email"
                                                         required/>
-                                                    <div class="invalid-feedback">Por favor digite seu email.</div>
+                                                    <div class="invalid-feedback" id="email-invalid">Por favor digite seu email.</div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="message"
+                                                    <label id="label-message" for="message"
                                                         class="form-label">Motivo do contato</label>
                                                     <textarea class="form-control"
                                                         id="message"
                                                         name="message"
                                                         placeholder="Descreva o motivo do contato."
                                                         rows="4" required></textarea>
-                                                    <div class="invalid-feedback">Por favor digite uma menssagem.</div>
+                                                    <div class="invalid-feedback" id="message-invalid">Por favor digite uma menssagem.</div>
                                                 </div>
                                                 <button id="submitButton" class="btn btn-primary"
                                                     type="submit"><i class="bi bi-send pe-2"></i>Enviar</button>
@@ -649,7 +657,7 @@
                                         </div>
 
                                         <h3 class="mb-0">Vinicius Vaz dos Santos</h3>
-                                        <small>Desenvolvedor Full Stack</small>
+                                        <small id="text-info-contact">Desenvolvedor Full Stack</small>
                                     </div>
                                     <div class="d-flex mb-4">
                                         <div>
@@ -663,7 +671,7 @@
                                             </svg>
                                         </div>
                                         <div class="ms-2">
-                                            <h5 class="mb-0">Endereço:</h5>
+                                            <h5 class="mb-0" id="address">Endereço:</h5>
                                             <small>Curitiba - PR</small>
                                         </div>
                                     </div>
@@ -679,7 +687,7 @@
                                             </svg>
                                         </div>
                                         <div class="ms-2">
-                                            <h5 class="mb-0">Celular:</h5>
+                                            <h5 class="mb-0" id="cellphone">Celular:</h5>
                                             <small>+55 (41) 99254-8449</small>
                                         </div>
                                     </div>
@@ -759,11 +767,11 @@
             <div class="container mt-7 pt-lg-7 pb-4">
                 <div class="row align-items-center">
                     <div class="col-md-12">
-                        <div class="small mb-3 mb-lg-0 text-lg-center">
+                        <div class="small mb-3 mb-lg-0 text-lg-center" id="direitos">
                             Copyright © <script>document.write(new Date().getFullYear());</script>
-                            | Designed by
+                            | Desenvolvido por
                             <span class="text-primary"><a href="#">Vinicius Vaz dos Santos</a></span>
-                            . Todos os direitos reservados. Este site utiliza classes do Bootstrap Themes
+                            . Todos os direitos reservados. Este site utiliza classes do Bootstrap Themes.
                         </div>
                     </div>
                 </div>
@@ -857,6 +865,52 @@
             });
         </script>
 
+        <!-- Alterna section ativa -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+
+                // Alterna o active ao navegar pela navbar 
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function () {
+                        // Remove a classe 'section-active' de todos os elementos
+                        navLinks.forEach(item => item.classList.remove('active'));
+
+                        // Adiciona a classe 'active' apenas ao elemento clicado
+                        this.classList.add('active');
+                    });
+                });
+
+                // Função para verificar se uma section está visível no viewport
+                function isElementVisible(element) {
+                    const rect = element.getBoundingClientRect();
+                    return (
+                        rect.top <= window.innerHeight / 2 &&
+                        rect.bottom >= window.innerHeight / 2
+                    );
+                }
+
+                // Função para adicionar a classe 'active' à nav-link correspondente à section visível
+                function setActiveNavLink() {
+                    sections.forEach((section, index) => {
+                        if (isElementVisible(section)) {
+                            // Adiciona a classe 'active' apenas à nav-link correspondente à section visível
+                            navLinks.forEach(link => link.classList.remove('active')); // Remove a classe 'active' de todas as nav-links
+                            navLinks[index].classList.add('active'); // Adiciona a classe 'active' à nav-link correspondente
+                        }
+                    });
+                }
+
+                // Adiciona um evento de rolagem (scroll) para chamar a função setActiveNavLink
+                window.addEventListener('scroll', setActiveNavLink);
+
+                // Chama a função setActiveNavLink para definir a nav-link ativa inicialmente ao carregar a página
+                setActiveNavLink();
+            });
+        </script>
+
+        <!-- Valida formulário de contato e envia email -->
         <script>
             // Fecha o offcanvas ao clicar em um link dentro
             $('.navbar').on('click', '.offcanvas a:not(.dropdown-toggle)', function(){
@@ -870,25 +924,51 @@
             document.getElementById('contact-form').addEventListener('submit', function(event) {
                 event.preventDefault(); // Impede o envio padrão do formulário
 
+                // Pega a linguagem da página
+                const lang = document.documentElement.lang;
+
                 // Valida o preenchimento do formulário de contato
                 if (validateInputs('contact-form')) {
                     // Envia e-mail usando Email.js
                     emailjs.sendForm('service_f0auw3i', 'template_1r3mq3t', this).then(function(response) {
                         // console.log('Email enviado!', response.status, response.text);
-                        atualizarModal(
-                            { titulo: 'Sucesso!', 
-                            conteudo: 'Email enviado com sucesso,<br> em breve entrarei em contato!' },
-                            './assets/images/success.webp',
-                            { titulo: 'text-primary', botao: 'btn-primary' }
-                        );
+                        if (lang === 'pt-br') {
+                            atualizarModal(
+                                { titulo: 'Sucesso!', 
+                                conteudo: `Email enviado com sucesso,<br> em breve entrarei em contato!` },
+                                './assets/images/success.webp',
+                                { titulo: 'text-primary', botao: 'btn-primary' }
+                            );
+                            document.getElementById('botao-voltar').innerText = 'Voltar';
+                        } else {
+                            atualizarModal(
+                                { titulo: 'Success!', 
+                                conteudo: `Email sent successfully,<br> I will contact you shortly!` },
+                                './assets/images/success.webp',
+                                { titulo: 'text-primary', botao: 'btn-primary' }
+                            );
+                            document.getElementById('botao-voltar').innerText = 'Back';
+                        }
+                        
                     }, function(error) {
                         // console.error('Erro ao enviar email:', error);
-                        atualizarModal(
-                            { titulo: 'Ops! algo deu errado.', 
-                            conteudo: 'Houve um erro ao enviar o email, por favor tente novamente.' },
-                            './assets/images/error.webp',
-                            { titulo: 'text-danger', botao: 'btn-danger' }
-                        );
+                        if (lang === 'pt-br') {
+                            atualizarModal(
+                                { titulo: 'Ops! algo deu errado.', 
+                                conteudo: "Houve um erro ao enviar o email, por favor tente novamente." },
+                                './assets/images/error.webp',
+                                { titulo: 'text-danger', botao: 'btn-danger' }
+                            );
+                            document.getElementById('botao-voltar').innerText = 'Voltar';
+                        } else {
+                            atualizarModal(
+                                { titulo: 'Oops! Something went wrong.', 
+                                conteudo: "There was an error sending the email. Please try again." },
+                                './assets/images/error.webp',
+                                { titulo: 'text-danger', botao: 'btn-danger' }
+                            );
+                            document.getElementById('botao-voltar').innerText = 'Back';
+                        }
                     });
                 }
             });
@@ -944,13 +1024,25 @@
 
                 // Verifica a validação do formulário
                 if (!valid) {
-                    // Exibe o modal de erro caso algum campo esteja vazio
-                    atualizarModal(
+                    if (document.documentElement.lang === 'pt-br') {
+                        // Exibe o modal de erro caso algum campo esteja vazio
+                        atualizarModal(
                             { titulo: 'Ops! algo deu errado.', 
                             conteudo: 'Por favor preencha todos os campos para continuar.' },
                             './assets/images/error.webp',
                             { titulo: 'text-danger', botao: 'btn-danger' }
                         );
+                        document.getElementById('botao-voltar').innerText = 'Voltar';
+                    } else {
+                        // Exibe o modal de erro caso algum campo esteja vazio
+                        atualizarModal(
+                            { titulo: 'Oops! Something went wrong.', 
+                            conteudo: "Please fill in all fields to continue." },
+                            './assets/images/error.webp',
+                            { titulo: 'text-danger', botao: 'btn-danger' }
+                        );
+                        document.getElementById('botao-voltar').innerText = 'Back';
+                    }
                 }
 
                 // Retorna a validação do form
@@ -968,12 +1060,14 @@
             }
         </script>
 
-        <script type="module" src="./assets/js/render_model.js"></script>
+        <script type="module" src="./assets/js/render-model.js"></script>
 
         <!-- Bootstrap 5.3 JS Bundle (opcional, para funcionalidades como dropdowns, popovers, etc.) -->
         <script src="./assets/libs/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
 
         <!-- Theme JS -->
+        <script src="./assets/js/dict-language.js"></script>
+        <script src="./assets/js/select-language.js"></script>
         <script type="module" src="./assets/js/color-modes.js"></script>
         <script src="./assets/js/theme.min.js"></script>
         <script src="./assets/libs/scrollcue/scrollCue.min.js"></script>

@@ -80,6 +80,32 @@ body[data-bs-theme="light"] .navbar {
     display: flex;
 }
 
+.img_lang {
+    object-fit: cover;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    border-radius: var(--bs-border-radius-pill);
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+[data-bs-theme="dark"] .navbar .navbar-nav .nav-item .nav-link.active {
+    background-color: rgba(30,41,59,var(--bs-bg-opacity,1)) !important;
+}
+
+.dropdown-item.lang-active {
+    background-color: var(--bs-dropdown-link-active-bg) !important;
+    color: var(--bs-dropdown-link-active-color) !important;
+    text-decoration: none !important;
+}
+
+.navbar .dropdown-menu {
+    min-width: 12rem !important;
+}
+
 .words {
     overflow: hidden;
 }

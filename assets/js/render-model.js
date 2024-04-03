@@ -49,10 +49,12 @@ const annotations = [
         reference: new THREE.Vector3(0, 0, 0),
         maxDistance: 5,
         content: '1',
-        description: `
-        <p class="card-text mb-0"><strong>Faróis de LED.</strong></p>
-        <p class="card-text mb-0"><strong>Regulagem de altura.</strong></p>`,
-        title: 'Farol Dianteiro',
+        description: {
+            'pt-br': `<p class="card-text mb-0"><strong>Faróis de LED.</strong></p>
+                      <p class="card-text mb-0"><strong>Regulagem de altura.</strong></p>`,
+            'en': `<p class="card-text mb-0"><strong>LED headlights.</strong></p>
+                   <p class="card-text mb-0"><strong>Height adjustment.</strong></p>`,},
+        title: {'pt-br': 'Farol Dianteiro', 'en': 'Front Headlight'},
         srcImage: 'assets/images/demo/frontlight.jpg',
     },
     {
@@ -61,14 +63,22 @@ const annotations = [
         reference: new THREE.Vector3(0, 0, 0),
         maxDistance: 5,
         content: '2',
-        description: `<p class="card-text mb-0"><strong>Cilindros:</strong> 6 em linha.</p>
-        <p class="card-text mb-0"><strong>Aspiração:</strong> Turbocompressor.</p>
-        <p class="card-text mb-0"><strong>Peso/potência:</strong> 3,65 kg/cv.</p>
-        <p class="card-text mb-0"><strong>Potência máxima:</strong> 431cv a 5600 rpm.</p>
-        <p class="card-text mb-0"><strong>Peso/torque:</strong> 28,0 kg/kgfm.</p>
-        <p class="card-text mb-0"><strong>Torque máximo:</strong> 56,1 kgfm a 1800 rpm.</p>
-        <p class="card-text mb-0"><strong>Rotação máxima:</strong> 7500 rpm.</p>`,
-        title: 'Motor',
+        description: {
+            'pt-br': `<p class="card-text mb-0"><strong>Cilindros:</strong> 6 em linha.</p>
+                    <p class="card-text mb-0"><strong>Aspiração:</strong> Turbocompressor.</p>
+                    <p class="card-text mb-0"><strong>Peso/potência:</strong> 3,65 kg/cv.</p>
+                    <p class="card-text mb-0"><strong>Potência máxima:</strong> 431cv a 5600 rpm.</p>
+                    <p class="card-text mb-0"><strong>Peso/torque:</strong> 28,0 kg/kgfm.</p>
+                    <p class="card-text mb-0"><strong>Torque máximo:</strong> 56,1 kgfm a 1800 rpm.</p>
+                    <p class="card-text mb-0"><strong>Rotação máxima:</strong> 7500 rpm.</p>`,
+            'en': `<p class="card-text mb-0"><strong>Cylinders:</strong> 6 in line.</p>
+                    <p class="card-text mb-0"><strong>Aspiration:</strong> Turbocharged.</p>
+                    <p class="card-text mb-0"><strong>Weight/power:</strong> 3.65 kg/hp.</p>
+                    <p class="card-text mb-0"><strong>Maximum power:</strong> 431 hp at 5600 rpm.</p>
+                    <p class="card-text mb-0"><strong>Weight/torque:</strong> 28.0 kg/kgfm.</p>
+                    <p class="card-text mb-0"><strong>Maximum torque:</strong> 56.1 kgfm at 1800 rpm.</p>
+                    <p class="card-text mb-0"><strong>Maximum rotation:</strong> 7500 rpm.</p>`},
+        title: {'pt-br': 'Motor', 'en': 'Engine'},
         srcImage: 'assets/images/demo/motor.jpg',
     },
     {
@@ -77,11 +87,14 @@ const annotations = [
         reference: new THREE.Vector3(0, 0, 0),
         maxDistance: 10,
         content: '3',
-        description: `
-        <p class="card-text mb-0"><strong>Tração:</strong> Traseira.</p>
-        <p class="card-text mb-0"><strong>Câmbio:</strong> Automatizado de 7 marchas.</p>
-        <p class="card-text mb-0"><strong>Acoplamento:</strong> Embreagem dupla a seco.</p>`,
-        title: 'Transmissão',
+        description: {
+            'pt-br': `<p class="card-text mb-0"><strong>Tração:</strong> Traseira.</p>
+                    <p class="card-text mb-0"><strong>Câmbio:</strong> Automatizado de 7 marchas.</p>
+                    <p class="card-text mb-0"><strong>Acoplamento:</strong> Embreagem dupla a seco.</p>`,
+            'en': `<p class="card-text mb-0"><strong>Drive:</strong> Rear.</p>
+                    <p class="card-text mb-0"><strong>Transmission:</strong> 7-speed automated.</p>
+                    <p class="card-text mb-0"><strong>Clutch:</strong> Dry dual clutch.</p>`},
+        title: {'pt-br': 'Transmissão', 'en': 'Transmission'},
         srcImage: 'assets/images/demo/transmissao.webp',
     },
     {
@@ -90,14 +103,20 @@ const annotations = [
         reference: new THREE.Vector3(1, -0.3, 1.3),
         maxDistance: 5,
         content: '4',
-        description: `
-        <p class="card-text mb-0"><strong>Tipo:</strong> ABS.</p>
-        <p class="card-text mb-0"><strong>Dianteiros:</strong> Disco ventilado.</p>
-        <p class="card-text mb-0"><strong>Traseiros:</strong> Disco ventilado.</p>
-        <p class="card-text mb-0"><strong>Pneus:</strong> 255/35 R19.</p>
-        <p class="card-text mb-0"><strong>Frenagem automática de emergência.</strong></p>
-        <p class="card-text mb-0"><strong>Monitoramento de pressão dos pneus.</strong></p>`,
-        title: 'Freios & Pneus',
+        description: {
+            'pt-br': `<p class="card-text mb-0"><strong>Tipo:</strong> ABS.</p>
+                    <p class="card-text mb-0"><strong>Dianteiros:</strong> Disco ventilado.</p>
+                    <p class="card-text mb-0"><strong>Traseiros:</strong> Disco ventilado.</p>
+                    <p class="card-text mb-0"><strong>Pneus:</strong> 255/35 R19.</p>
+                    <p class="card-text mb-0"><strong>Frenagem automática de emergência.</strong></p>
+                    <p class="card-text mb-0"><strong>Monitoramento de pressão dos pneus.</strong></p>`,
+            'en': `<p class="card-text mb-0"><strong>Type:</strong> ABS.</p>
+                <p class="card-text mb-0"><strong>Front:</strong> Ventilated disc.</p>
+                <p class="card-text mb-0"><strong>Rear:</strong> Ventilated disc.</p>
+                <p class="card-text mb-0"><strong>Tires:</strong> 255/35 R19.</p>
+                <p class="card-text mb-0"><strong>Automatic emergency braking.</strong></p>
+                <p class="card-text mb-0"><strong>Tire pressure monitoring.</strong></p>`},
+        title: {'pt-br': 'Freios & Pneus', 'en': 'Brakes & Tires'},
         srcImage: 'assets/images/demo/roda.png',
     },
     {
@@ -106,13 +125,18 @@ const annotations = [
         reference: new THREE.Vector3(0.3, 0.2, 0),
         maxDistance: 0.6,
         content: '5',
-        description: `
-        <p class="card-text mb-0"><strong>Velocidade máxima:</strong> 250 km/h.</p>
-        <p class="card-text mb-0"><strong>Aceleração 0-100 km/h:</strong> 4,1 s.</p>
-        <p class="card-text mb-0"><strong>Consumo Urbano:</strong> 7,4 km/l.</p>
-        <p class="card-text mb-0"><strong>Consumo Rodoviário:</strong> 9,2 km/l.</p>
-        <p class="card-text mb-0"><strong>Autonomia Máxima:</strong> 552 km.</p>`,
-        title: 'Consumo & Desempenho',
+        description: {
+            'pt-br': `<p class="card-text mb-0"><strong>Velocidade máxima:</strong> 250 km/h.</p>
+                    <p class="card-text mb-0"><strong>Aceleração 0-100 km/h:</strong> 4,1 s.</p>
+                    <p class="card-text mb-0"><strong>Consumo Urbano:</strong> 7,4 km/l.</p>
+                    <p class="card-text mb-0"><strong>Consumo Rodoviário:</strong> 9,2 km/l.</p>
+                    <p class="card-text mb-0"><strong>Autonomia Máxima:</strong> 552 km.</p>`,
+            'en': `<p class="card-text mb-0"><strong>Maximum speed:</strong> 250 km/h.</p>
+                    <p class="card-text mb-0"><strong>Acceleration 0-100 km/h:</strong> 4.1 s.</p>
+                    <p class="card-text mb-0"><strong>Urban consumption:</strong> 7.4 km/l.</p>
+                    <p class="card-text mb-0"><strong>Highway consumption:</strong> 9.2 km/l.</p>
+                    <p class="card-text mb-0"><strong>Maximum autonomy:</strong> 552 km.</p>`},
+        title: {'pt-br': 'Consumo & Desempenho', 'en': 'Consumption & Performance'},
         srcImage: 'assets/images/demo/painel.jpg',
     },
     {
@@ -121,10 +145,12 @@ const annotations = [
         reference: new THREE.Vector3(0, 0, 0),
         maxDistance: 8,
         content: '6',
-        description: `
-        <p class="card-text mb-0"><strong>Sensores de estacionamento.</strong></p>
-        <p class="card-text mb-0"><strong>Câmera traseira para manobras.</strong></p>`,
-        title: 'Traseira',
+        description: {
+            'pt-br': `<p class="card-text mb-0"><strong>Sensores de estacionamento.</strong></p>
+                    <p class="card-text mb-0"><strong>Câmera traseira para manobras.</strong></p>`,
+            'en': `<p class="card-text mb-0"><strong>Parking sensors.</strong></p>
+                    <p class="card-text mb-0"><strong>Rear camera for maneuvers.</strong></p>`},
+        title: {'pt-br': 'Traseira', 'en': 'Rear'},
         srcImage: 'assets/images/demo/backlight.webp',
     },
 ];
@@ -143,38 +169,37 @@ function addLabelsToModel(model) {
         css2DObject.position.copy(annotation.position);
         model.add(css2DObject);
 
-        // Cria o card como uma string HTML
-        const cardHTML = `
-        <div class="card border-primary" style="width: 14rem;">
-            <div class="card-img-top">
-                <img src="${annotation.srcImage}" class="w-100" alt="Imagem Veiculo">
-            </div>
-            
-            <div class="card-body">
-                <h5 class="card-title">${annotation.title}</h5>
-                ${annotation.description}
-            </div>
-        </div>`;
-
-        // Cria o card com título, valor e imagem
-        const cardElement = document.createElement('div');
-        cardElement.innerHTML = cardHTML;
-        cardElement.classList.add('annotation-card');
-        cardElement.hidden = true; // Card começa oculto
-
-        // Adiciona o CSS2DObject como filho do modelo
-        const cardCss2DObject = new CSS2DObject(cardElement);
-        cardCss2DObject.position.copy(annotation.position);
-        model.add(cardCss2DObject);
-        cardCss2DObject.center.set(0, 0);
-        cardCss2DObject.layers.set(index);
-
-
         button.addEventListener('click', () => {
             // Para a rotação e redefine a posição inicial do modelo
             rotating = false;
             controls.maxDistance = annotation.maxDistance; // delimita o controle
-            // camera.position.set(0, -0.8, 0); // Move o modelo 1 unidade para baixo
+
+            // Cria o card como uma string HTML
+            const lang = document.documentElement.lang;
+            const cardHTML = `
+            <div class="card border-primary" style="width: 14rem;">
+                <div class="card-img-top">
+                    <img src="${annotation.srcImage}" class="w-100" alt="Imagem Veiculo">
+                </div>
+                
+                <div class="card-body">
+                    <h5 class="card-title">${annotation.title[lang]}</h5>
+                    ${annotation.description[lang]}
+                </div>
+            </div>`;
+
+            // Cria o card com título, valor e imagem
+            const cardElement = document.createElement('div');
+            cardElement.innerHTML = cardHTML;
+            cardElement.classList.add('annotation-card');
+            cardElement.hidden = true; // Card começa oculto
+
+            // Adiciona o CSS2DObject como filho do modelo
+            const cardCss2DObject = new CSS2DObject(cardElement);
+            cardCss2DObject.position.copy(annotation.position);
+            model.add(cardCss2DObject);
+            cardCss2DObject.center.set(0, 0);
+            cardCss2DObject.layers.set(index);
 
             // Oculta asanotações
             hideAnnotations()
