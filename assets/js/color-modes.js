@@ -46,13 +46,22 @@ import { scene } from './render-model.js'; // Importa a variável scene
     // Função para atualizar a classe do navbar com base no tema
     const updateNavbarClass = (theme) => {
         const navbar = document.querySelector("nav.navbar");
+        const iconTheme = document.querySelector("i.theme-icon-active");
         if (navbar) {
             if (theme === "dark") {
                 navbar.classList.remove("navbar-light");
                 navbar.classList.add("navbar-dark");
+                iconTheme.classList.remove("bi-sun-fill");
+                iconTheme.classList.add("bi-moon-stars-fill");
+                iconTheme.parentElement.classList.remove("bg-warning", "border-warning", "text-warning");
+                iconTheme.parentElement.classList.add("bg-primary", "border-primary", "text-primary");
             } else {
                 navbar.classList.remove("navbar-dark");
                 navbar.classList.add("navbar-light");
+                iconTheme.classList.remove("bi-moon-stars-fill");
+                iconTheme.classList.add("bi-sun-fill");
+                iconTheme.parentElement.classList.remove("bg-primary", "border-primary", "text-primary");
+                iconTheme.parentElement.classList.add("bg-warning", "border-warning", "text-warning");
             }
         }
     };
