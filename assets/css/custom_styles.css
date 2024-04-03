@@ -154,3 +154,7 @@ body[data-bs-theme="light"] .navbar {
     max-height: 33rem !important;
 }
 
+.annotation-card .card-img {
+    height: 12rem;
+}
+

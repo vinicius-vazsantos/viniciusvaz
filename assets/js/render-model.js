@@ -5,8 +5,9 @@ import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer
 import TWEEN from '@tweenjs/tween.js';
 
 
-// Variável de controle de rotação
+// Variáveis de controle
 let rotating = true;
+let move = true;
 let rotateDirection = 1;
 
 // Calcula e define o tamanho da cena dinamicamente
@@ -162,12 +163,23 @@ function addLabelsToModel(model) {
         button.textContent = annotation.content;
         button.style.width = '1.5rem';
         button.style.height = '1.5rem';
+        button.style.zIndex = index;
         button.classList.add('annotation');
 
         // Adiciona o CSS2DObject como filho do modelo
         const css2DObject = new CSS2DObject(button);
         css2DObject.position.copy(annotation.position);
         model.add(css2DObject);
+
+        // Evento desabilita controle para permitir click
+        button.addEventListener('mouseenter', () => {
+            move = false;
+        })
+        
+        // Evento habilita controle para permitir controle de orbita
+        button.addEventListener('mouseleave', () => {
+            move = true;
+        })
 
         button.addEventListener('click', () => {
             // Para a rotação e redefine a posição inicial do modelo
@@ -178,7 +190,7 @@ function addLabelsToModel(model) {
             const lang = document.documentElement.lang;
             const cardHTML = `
             <div class="card border-primary" style="width: 14rem;">
-                <div class="card-img-top">
+                <div class="card-img">
                     <img src="${annotation.srcImage}" class="w-100" alt="Imagem Veiculo">
                 </div>
                 
@@ -269,7 +281,7 @@ loader.load('./assets/models/bmw_m4_f82.glb', (gltf) => {
         rotating = !rotating; // Inverte o estado do ícone
     });
     
-    // Evento para pausar rotação do modelo
+    // Evento para alternar rotação do modelo
     const changeRotate = document.getElementById('changeRotate');
     changeRotate.addEventListener('click', () => {
         // Verifica se o ícone está pausado ou não
@@ -291,6 +303,7 @@ container.appendChild(css2DRenderer.domElement);
 
 // Controle de Orbita
 const controls = new OrbitControls(camera, css2DRenderer.domElement);
+controls.enabled = true;
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.rotateSpeed = 0.5; // Velocidade de rotação do controle
@@ -336,10 +349,9 @@ function animate() {
     const radius = 5; // Distância da câmera ao modelo
     const cameraX = Math.cos(angle) * radius;
     const cameraZ = Math.sin(angle) * radius;
-    controls.enabled = !rotating;
+    controls.enabled = move;
 
     if (rotating) {
-        
         camera.position.set(cameraX, 0, cameraZ); // Ajuste a altura da câmera conforme necessário
         camera.lookAt(new THREE.Vector3(0, 0, 0)); // Garante que a câmera sempre aponte para o modelo
 
@@ -348,7 +360,6 @@ function animate() {
 
     // Atualizando a posição da luz spot para acompanhar a câmera
     spotLightCamera.position.copy(camera.position);
-
 
     TWEEN.update();
     controls.update();
