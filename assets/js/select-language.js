@@ -44,7 +44,7 @@ function changeLanguage(langCode, element) {
     
     // Altera texto da section experience
     document.getElementById('title-experience').innerHTML = langSelect.experience.title;
-    document.getElementById('text-experience').innerText = langSelect.experience.text;
+    document.getElementById('text-experience').innerHTML = langSelect.experience.text;
     document.getElementById('title-first-experience').innerText = langSelect.experience.titleFirstExperience;
     document.getElementById('text-first-experience').innerText = langSelect.experience.textFirstExperience;
     document.getElementById('title-second-experience').innerText = langSelect.experience.titleSecondExperience;
