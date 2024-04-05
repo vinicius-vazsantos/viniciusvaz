@@ -874,10 +874,10 @@
                 navLinks.forEach(link => {
                     link.addEventListener('click', function () {
                         // Remove a classe 'section-active' de todos os elementos
-                        navLinks.forEach(item => item.classList.remove('active'));
+                        navLinks.forEach(item => item.classList.remove('nav-active'));
 
                         // Adiciona a classe 'active' apenas ao elemento clicado
-                        this.classList.add('active');
+                        this.classList.add('nav-active');
                     });
                 });
 
@@ -895,8 +895,8 @@
                     sections.forEach((section, index) => {
                         if (isElementVisible(section)) {
                             // Adiciona a classe 'active' apenas à nav-link correspondente à section visível
-                            navLinks.forEach(link => link.classList.remove('active')); // Remove a classe 'active' de todas as nav-links
-                            navLinks[index].classList.add('active'); // Adiciona a classe 'active' à nav-link correspondente
+                            navLinks.forEach(link => link.classList.remove('nav-active')); // Remove a classe 'active' de todas as nav-links
+                            navLinks[index].classList.add('nav-active'); // Adiciona a classe 'active' à nav-link correspondente
                         }
                     });
                 }
