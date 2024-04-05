@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { scene } from './render-model.js'; // Importa a variável scene
+import { scene, spotLight } from './render-model.js'; // Importa a variável scene
 
 (() => {
     "use strict";
@@ -19,10 +19,11 @@ import { scene } from './render-model.js'; // Importa a variável scene
 
     // Função para atualizar a cor de fundo do ThreeJs.js com base no tema
     const updateColorThreeJs = (theme) => {
-        // const colorThreeJs = theme === "dark" ? 0x020617 : 0xe1e2e4;
+        const intensityThreeJs = theme === "dark" ? 300 : 600;
         const colorThreeJs = theme === "dark" ? 0x020617 : 0xe1e2e4;
         // Altera o background da cena no modo light
         scene.background = new THREE.Color(colorThreeJs);
+        spotLight.intensity = intensityThreeJs;
     };
 
     // Função para atualizar a cor do Vanta.js com base no tema

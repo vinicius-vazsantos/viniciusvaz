@@ -368,4 +368,4 @@ function animate() {
 }
 animate();
 
-export { scene };
+export { scene, spotLight };
