@@ -23,6 +23,30 @@
         <script src="./assets/libs/Jquery/jquery.min.js"></script>
     </head>
     <body class="position-relative" data-bs-theme="dark">
+        <!-- Loader-->
+        <div id="container_progress" class="mt-10 w-100 position-absolute">
+			<div class="d-flex justify-content-center align-items-center flex-column h-100 w-100 py-auto" style="z-index: 1;">
+                
+                <div class="hourglassBackground">
+                    <div aria-live="assertive" role="alert" class="loader"></div>
+                    <div class="hourglassContainer">
+                      <div class="hourglassCurves"></div>
+                      <div class="hourglassCapTop"></div>
+                      <div class="hourglassGlassTop"></div>
+                      <div class="hourglassSand"></div>
+                      <div class="hourglassSandStream"></div>
+                      <div class="hourglassCapBottom"></div>
+                      <div class="hourglassGlass"></div>
+                    </div>
+                  </div>
+				<h5>Carregando Portifólio</h5>
+				<div class="progress w-25" style="height: 8px !important;">
+					<div id="progressBar" style="width: 25%;" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="25" aria-valuemax="100"></div>
+				</div>
+				<p id="percent-progressBar">25%</p>
+			</div>
+		</div>
+
         <!-- Início Navbar -->
         <div id="containerNavbar" hidden class="position-fixed w-100">
             <div class="d-flex justify-content-center">
@@ -137,7 +161,7 @@
         </div>
         <!-- Fim Navbar -->
 
-        <main style="visibility: none;">
+        <main style="opacity: 0;">
             <!--Início Home-->
             <section id="home">
                 <div class="container py-lg-9 py-10" data-cue="fadeIn" data-show="true" style="animation-name: fadeIn; animation-duration: 600ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
@@ -794,30 +818,6 @@
             </svg>
         </div>
 
-        <!-- Loader-->
-        <div id="container_progress" class="vh-100">
-			<div class="d-flex justify-content-center align-items-center flex-column h-100 w-100 py-auto" style="z-index: 1;">
-                
-                <div class="hourglassBackground">
-                    <div aria-live="assertive" role="alert" class="loader"></div>
-                    <div class="hourglassContainer">
-                      <div class="hourglassCurves"></div>
-                      <div class="hourglassCapTop"></div>
-                      <div class="hourglassGlassTop"></div>
-                      <div class="hourglassSand"></div>
-                      <div class="hourglassSandStream"></div>
-                      <div class="hourglassCapBottom"></div>
-                      <div class="hourglassGlass"></div>
-                    </div>
-                  </div>
-				<h5>Carregando Portifólio</h5>
-				<div class="progress w-25" style="height: 8px !important;">
-					<div id="progressBar" style="width: 25%;" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="25" aria-valuemax="100"></div>
-				</div>
-				<p id="percent-progressBar">25%</p>
-			</div>
-		</div>
-
         <!-- Exibe o loading antes de renderizar a página -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -835,7 +835,7 @@
                     setTimeout(()=>{
                         containerProgress.hidden = true;
                         footer.hidden = false;
-                        main.style.display = 'block';
+                        main.style.opacity = 1;
                         containerNavbar.hidden = false;
                     }, 500)
                 }
@@ -844,7 +844,7 @@
                 window.addEventListener('load', function() {
                     // Chama a função para iniciar o carregamento progressivo
                     // Oculta o progresso e exibe os elementos ocultos após o carregamento completo da página
-                    setInterval(updateProgressBar, 200); // Atualiza a cada meio segundo (500 milissegundos)
+                    setInterval(updateProgressBar, 200);
                 });
 
                 // Atualiza a progress ao carregar a página
@@ -865,7 +865,7 @@
                 function hideVisibleElements() {
                     containerProgress.hidden = false;
                     footer.hidden = true;
-                    main.style.display = 'none';
+                    main.style.opacity = 0;
                     containerNavbar.hidden = true;
                 }
 
