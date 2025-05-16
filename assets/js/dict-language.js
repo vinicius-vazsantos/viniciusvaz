@@ -26,12 +26,11 @@ const dictionary = {
         },
         about: {
             aboutTitle: `Sobre <span class="text-primary">mim</span>`,
-            aboutText: "Meu nome é Vinicius Vaz, brasileiro 25 anos, iniciei na tecnologia com conhecimentos técnicos,\
-            passando pela engenharia e agora há 4 anos atuo na programação, buscando dominar linguagens e \
-            implementar tecnologias performáticas e inovadoras. Possuo experiência em diversas áreas, no Frontend domino HTML, \
-            CSS, Bootstrap e JavaScript. Ja no BackEnd crio views e Rest API's em Python, PHP e Vue. Enquanto que no Mobile desenvolvo aplicações em Flutter e Dart.\
-            Na análise de dados tenho experiencia e conhecimentos sólidos em Power BI, SQL Server, MySQL e versionamento de código com Git.\
-            Atualmente, bacharel em Engenharia Elétrica e em busca de aprimoramento contínuo.",
+            aboutText: `Meu nome é Vinicius Vaz, brasileiro, 26 anos. Iniciei na tecnologia com conhecimentos técnicos, passando pela engenharia, e agora há 5 anos atuo na programação, buscando dominar linguagens e implementar tecnologias performáticas e inovadoras.
+            Possuo experiência em diversas áreas. No Frontend, domino HTML, CSS, Bootstrap, Tailwind, JavaScript e TypeScript. Já no Backend, crio views e APIs REST utilizando Go, PHP e Python. No Mobile, desenvolvo aplicações em Flutter com Dart.
+            Na análise de dados, tenho experiência e conhecimentos sólidos em Power BI, SQL Server, MySQL e PostgreSQL, além de versionamento de código com Git e GitHub.
+            Docker também faz parte do meu fluxo de trabalho, sendo usado para conteinerização de aplicações, otimizando o processo de desenvolvimento, testes e deploy em ambientes escaláveis e padronizados.
+            Atualmente, sou bacharel em Engenharia Elétrica e sigo em busca de aprimoramento contínuo.`,
             frontEnd: "Desenvolvimento de interfaces responsivas e modernas para web, com foco em experiências de usuário atrativas e funcionais, seguindo as melhores práticas de design e desenvolvimento frontend.",
             backEnd: "Integrações com bancos de dados e criação de serviços web robustos e escaláveis para garantir sistemas eficientes e seguros no backend, com alta performance e confiabilidade nas aplicações.",
             titleBiAnalist: "Analista de dados",
@@ -105,12 +104,11 @@ const dictionary = {
         },
         about: {
             aboutTitle: `About <span class="text-primary">me</span>`,
-            aboutText: "My name is Vinicius Vaz, Brazilian, 25 years old. I started in technology with technical knowledge, \
-            went through engineering, and for the past 4 years, I have been working in programming, \
-            aiming to master languages and implement performant and innovative technologies. I have experience in various areas; in Frontend, \
-            I master HTML, CSS, Bootstrap, and JavaScript. In Backend, I create views and Rest APIs using Python, PHP, and Vue. Additionally, in Mobile development, I build applications with Flutter and Dart. \
-            In data analysis, I have solid experience and knowledge in Power BI, SQL Server, MySQL, and code versioning with Git. \
-            Currently, I hold a bachelor's degree in Electrical Engineering and am constantly seeking continuous improvement.",
+            aboutText: `My name is Vinicius Vaz, I’m Brazilian and 26 years old. I started in technology with technical knowledge, moved through engineering, and for the past 5 years, I’ve been working in software development, aiming to master programming languages and implement high-performance, innovative technologies.
+            I have experience in several areas. On the frontend, I’m proficient in HTML, CSS, Bootstrap, Tailwind, JavaScript, and TypeScript. On the backend, I build views and REST APIs using Go, PHP, and Python. In mobile development, I create applications with Flutter and Dart.
+            In data analysis, I have solid experience and knowledge in Power BI, SQL Server, MySQL, and PostgreSQL, along with code versioning using Git and GitHub.
+            Docker is also part of my workflow, used for containerizing applications and optimizing the development, testing, and deployment process in scalable and standardized environments.
+            Currently, I hold a bachelor’s degree in Electrical Engineering and am continuously seeking to improve and grow professionally.`,
             frontEnd: "Development of responsive and modern web interfaces, focusing on engaging and functional user experiences, following the best practices of frontend design and development.",
             backEnd: "Database integrations and creation of robust and scalable web services to ensure efficient and secure backend systems, with high performance and reliability in applications.",
             titleBiAnalist: "Data Analyst",
